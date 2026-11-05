@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Mae B. Pacio | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1d1c2d; --text:#f5f3ed; --muted:#a5a3b8;
+  --purple:#8985c6; --lavender:#c3bdf7; --cyan:#8ccbf2;
+  --line:rgba(205,203,177,.15);
+  --mono:"DM Mono",monospace; --tech:"Orbitron",sans-serif; --sans:"Manrope",sans-serif;
+  --nav-h:60px;
+  --stage-h:min(72vh,620px);   /* portrait height */
+  --name-offset:0%;            /* nudge the name up/down against the portrait */
+  --lift:.10;                  /* raises the whole group: portrait, glow and orbits */
+  --img-lift:.10;              /* raises ONLY the portrait photo, on top of --lift */
+  --mouse-x:0; --mouse-y:0; --cursor-x:0; --cursor-y:0;
+}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--sans)}
+button{font:inherit}
+[hidden]{display:none!important}
+
+.background{position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 22% 50%,#51487566,transparent 43%),radial-gradient(ellipse at 75% 45%,#302b4d55,transparent 48%),var(--bg)}
+.background::before{content:"";position:absolute;inset:0;opacity:.2;
+  background-image:radial-gradient(circle,#c3bdf755 1px,transparent 1.5px),linear-gradient(118deg,transparent 42%,#a5a0e812 42.2%,transparent 42.5%),linear-gradient(28deg,transparent 58%,#a5a0e80d 58.2%,transparent 58.5%);
+  background-size:92px 84px,100% 100%,100% 100%;animation:networkDrift 32s linear infinite}
+.background::after{content:"";position:absolute;inset:0;opacity:.42;
+  background:
+    radial-gradient(circle at 12% 24%,#eee9ff 0 1.5px,transparent 3px),
+    radial-gradient(circle at 28% 72%,#cbb8f2 0 1px,transparent 2.5px),
+    radial-gradient(circle at 54% 18%,#d8d1ff 0 2px,transparent 3.5px),
+    radial-gradient(circle at 78% 34%,#cbb8f2 0 1px,transparent 2.5px),
+    radial-gradient(circle at 91% 76%,#d8d1ff 0 1.5px,transparent 3px),
+    radial-gradient(circle at 7% 58%,#cbb8f2 0 2px,transparent 3.5px),
+    radial-gradient(circle at 19% 87%,#d8d1ff 0 1px,transparent 2.5px),
+    radial-gradient(circle at 39% 42%,#cbb8f2 0 1.5px,transparent 3px),
+    radial-gradient(circle at 63% 82%,#d8d1ff 0 2px,transparent 3.5px),
+    radial-gradient(circle at 72% 61%,#cbb8f2 0 1px,transparent 2.5px),
+    radial-gradient(circle at 86% 12%,#d8d1ff 0 1.5px,transparent 3px),
+    radial-gradient(circle at 4% 12%,#cbb8f2 0 .7px,transparent 1.8px),
+    radial-gradient(circle at 16% 43%,#d8d1ff 0 .6px,transparent 1.6px),
+    radial-gradient(circle at 24% 18%,#cbb8f2 0 .8px,transparent 1.9px),
+    radial-gradient(circle at 34% 88%,#d8d1ff 0 .6px,transparent 1.6px),
+    radial-gradient(circle at 47% 31%,#cbb8f2 0 .7px,transparent 1.8px),
+    radial-gradient(circle at 58% 67%,#d8d1ff 0 .8px,transparent 1.9px),
+    radial-gradient(circle at 68% 9%,#cbb8f2 0 .6px,transparent 1.6px),
+    radial-gradient(circle at 75% 88%,#d8d1ff 0 .7px,transparent 1.8px),
+    radial-gradient(circle at 82% 52%,#cbb8f2 0 .8px,transparent 1.9px),
+    radial-gradient(circle at 96% 28%,#d8d1ff 0 .6px,transparent 1.6px),
+    radial-gradient(circle at 11% 94%,#cbb8f2 0 .7px,transparent 1.8px),
+    radial-gradient(circle at 44% 8%,#d8d1ff 0 .8px,transparent 1.9px),
+    radial-gradient(circle at 52% 93%,#cbb8f2 0 .6px,transparent 1.6px),
+    radial-gradient(circle at 89% 92%,#d8d1ff 0 .7px,transparent 1.8px),
+    repeating-linear-gradient(to bottom,transparent 0,transparent 3px,#ffffff09 4px);
+  animation:ledBlink 5.8s ease-in-out infinite}
+.cursor-glow{position:fixed;z-index:1;left:calc(var(--cursor-x) * 1px);top:calc(var(--cursor-y) * 1px);
+  width:180px;height:180px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#a5a0e81c 0%,transparent 68%);filter:blur(8px)}
+
+/* TOP NAVIGATION */
+.navigation{position:fixed;z-index:30;top:0;left:0;right:0;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:center;gap:clamp(28px,6vw,70px);
+  border-bottom:1px solid #ffffff14;background:#1d1c2dee;backdrop-filter:blur(6px)}
+.nav-button{position:relative;border:0;padding:8px 2px;background:transparent;color:#858294;
+  font:11px var(--mono);letter-spacing:.14em;cursor:pointer}
+.nav-button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--lavender);
+  transform:scaleX(0);transition:transform .3s}
+.nav-button:hover,.nav-button.current{color:var(--text)}
+.nav-button.current::after{transform:scaleX(1)}
+.nav-button:focus-visible,.edge:focus-visible{outline:1px solid var(--lavender);outline-offset:4px}
+
+/* SCREENS */
+.screen{position:absolute;inset:0;z-index:1;opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateX(18px);transition:opacity .45s ease,transform .55s ease,visibility .55s}
+.screen.active{z-index:3;opacity:1;visibility:visible;transform:none}
+
+/* HOME */
+.home-layout{width:100%;height:100%;display:grid;grid-template-columns:.88fr 1.12fr;
+  position:relative;z-index:1;align-items:center;gap:5vw;padding:calc(var(--nav-h) + 4vh) 8vw 0;
+  transform:translateY(3vh)}
+.home-layout::before{content:"";position:absolute;top:15%;bottom:10%;left:44%;width:1px;
+  background:linear-gradient(to bottom,transparent,#a5a0e81f 18%,#a5a0e81f 82%,transparent)}
+.screen.active#home::before{content:"";position:absolute;z-index:0;inset:86px 38px 34px;pointer-events:none;opacity:.5;
+  background:linear-gradient(var(--lavender),var(--lavender)) left top/42px 1px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) left top/1px 42px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) right top/42px 1px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) right top/1px 42px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) left bottom/42px 1px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) left bottom/1px 42px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) right bottom/42px 1px no-repeat,
+    linear-gradient(var(--lavender),var(--lavender)) right bottom/1px 42px no-repeat}
+
+.portrait-stage{position:relative;top:calc(var(--stage-h) * var(--lift) * -1);width:100%;height:var(--stage-h);min-width:0;
+  display:flex;align-items:center;justify-content:center;
+  transform:translate3d(calc(var(--mouse-x) * 8px),calc(var(--mouse-y) * 4px),0);
+  transition:transform .18s ease-out}
+.portrait-glow{position:absolute;width:95%;height:80%;border-radius:50%;background:#6354b71c;filter:blur(48px)}
+.orbit{position:absolute;width:100%;height:50%;border:1px solid #b9b2f018;border-radius:50%;
+  transform:rotate(-28deg);pointer-events:none}
+.orbit-two{width:120%;height:50%;transform:rotate(35deg)}
+.marker{position:absolute;z-index:5;color:var(--lavender);font:14px var(--mono);opacity:.7}
+.marker-one{top:15%;left:12%} .marker-two{top:54%;right:3%}
+
+.portrait-frame{position:relative;isolation:isolate;translate:0 calc(var(--stage-h) * var(--img-lift) * -1);width:100%;height:100%;max-width:470px;
+  display:flex;align-items:center;justify-content:center;animation:portraitAppear 1.2s ease both}
+.portrait-layer{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;
+  object-position:center bottom;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 8%,#000 20%),linear-gradient(to right,transparent 0%,#0003 6%,#000 20%,#000 80%,#0003 94%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to bottom,transparent 0%,transparent 8%,#000 20%),linear-gradient(to right,transparent 0%,#0003 6%,#000 20%,#000 80%,#0003 94%,transparent 100%);
+  mask-composite:intersect}
+.portrait-base{z-index:1;opacity:.48;filter:grayscale(100%) contrast(1.08) brightness(.9)}
+.portrait-color{z-index:2;clip-path:inset(100% 0 0 0);filter:contrast(1.02) saturate(.88);
+  animation:revealPortrait 2.4s ease-out forwards}
+
+/* NAME SIDE: starts at the top of the portrait so the name sits at head level */
+.name-side{position:relative;z-index:7;min-width:0;height:var(--stage-h);
+  display:flex;flex-direction:column;justify-content:flex-start;padding-top:var(--name-offset)}
+.name{width:100%;margin:10;font-family:var(--tech);font-size:clamp(30px,4.5vw,64px);font-weight:500;transform: translateX(15px);
+  line-height:1.5;letter-spacing:.09em;overflow-wrap:anywhere;
+  text-shadow:0 0 2px #fff,0 0 5px #fff,0 0 12px #aaa5ef,0 0 24px #928ce7,0 0 42px #8f87e899}
+.name span{display:block}
+.name-first{color:#f5f3ed} .name-second{color:#f5f3ed}
+
+.tagline{margin-top:12px;transform:translateY(-8px);font:400 clamp(9px,.9vw,13px)/1.9 var(--mono);transform: translateX(15px);
+  color:#aaa6c1;letter-spacing:.13em;text-transform:uppercase;
+  text-shadow:0 0 5px #a5a0e866,0 0 12px #a5a0e833}
+.tagline span{display:block;min-height:2em}
+.tagline .tag-motto{color:var(--cyan)}
+.tagline::after{content:"_";display:inline-block;margin-left:4px;color:var(--lavender);
+  animation:cursorBlink 1s steps(1,end) infinite}
+
+.loader{width:min(320px,85%);margin-top:26px;transition:opacity .8s ease,filter .8s ease}
+.loader.fade{opacity:0;filter:blur(6px)}
+.loader-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px;color:var(--lavender);transform: translateX(15px);
+  font:8px var(--mono);letter-spacing:.1em}
+.track{width:100%;height:2px;overflow:hidden;background:#a5a0e826;transform: translateX(15px)}
+.fill{width:0;height:100%;background:#c3bdf7;
+  box-shadow:0 0 4px #c3bdf7,0 0 10px #a5a0e8,0 0 18px #8f87e899}
+.explore-link{display:inline-flex;align-items:center;gap:10px;width:max-content;margin:22px 0 0 15px;padding:10px 15px;
+  border:1px solid var(--lavender);color:var(--lavender);font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:opacity .8s ease,transform .8s ease,background-color .25s ease,color .25s ease,box-shadow .25s ease}
+.explore-link.ready{opacity:1;transform:translateY(0);pointer-events:auto}
+.explore-link:hover,.explore-link:focus-visible{background:var(--lavender);color:#171321;box-shadow:0 0 16px #a5a0e866;outline:none}
+
+/* EDUCATION: route map + detail card (single page, no scrolling) */
+.edu{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(10px,2vh,22px);
+  padding:calc(var(--nav-h) + clamp(14px,3vh,30px)) 7vw clamp(14px,3vh,30px);pointer-events:none}
+.edu-head{flex:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.page-kicker{margin:0 0 8px;color:var(--purple);font:9px var(--mono);letter-spacing:.16em}
+.page-title{margin:0;font-size:clamp(28px,5.4vh,54px);line-height:1.1;font-weight:300;letter-spacing:-.05em}
+.page-title em{color:var(--lavender);font-family:Georgia,serif;font-weight:400}
+.edu-hint{margin:0;max-width:310px;color:#9f9cb0;font-size:11px;line-height:1.8;text-align:right}
+.edu-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(290px,.8fr);gap:clamp(20px,3.5vw,50px)}
+
+.map-panel{position:relative;min-height:0;overflow:hidden;border:1px solid var(--line);background-color:#1b1a26b0;
+  background-image:linear-gradient(#ffffff09 1px,transparent 1px),linear-gradient(90deg,#ffffff09 1px,transparent 1px);background-size:34px 34px}
+.map-svg{position:absolute;inset:0;width:100%;height:100%}
+.map-tag{position:absolute;font:8px var(--mono);letter-spacing:.15em;color:#7e7a94}
+.map-tag.tl{top:12px;left:14px}.map-tag.br{bottom:12px;right:14px}
+.topo{fill:none;stroke:#a5a0e814;stroke-width:1}
+.route-base{fill:none;stroke:#a5a0e830;stroke-width:2;stroke-linecap:round}
+.route-flow{fill:none;stroke:var(--lavender);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:3 9;animation:flow 1.8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.pin{cursor:pointer;pointer-events:auto;outline:none}
+.pin .ring{fill:var(--bg);stroke:var(--purple);stroke-width:1.5;transition:fill .25s}
+.pin .dot{fill:var(--purple);transition:fill .25s}
+.pin .pulse{fill:none;stroke:var(--lavender);stroke-width:1;opacity:0}
+.pin:hover .ring,.pin:focus-visible .ring{stroke:var(--text)}
+.pin.sel .ring{fill:var(--lavender);stroke:var(--lavender)}.pin.sel .dot{fill:var(--bg)}
+.pin.sel .pulse{animation:pulse 2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
+.lbl{font:500 10px var(--mono);letter-spacing:.06em;fill:#a9a6bd;paint-order:stroke;stroke:#1a1924;stroke-width:5px;stroke-linejoin:round}
+.lbl .l-years{font-size:8px;fill:var(--cyan);letter-spacing:.1em}
+.pin.sel .lbl{fill:#fff}
+
+.school-card{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);background:#1d1c2af0;pointer-events:auto}
+.card-top{flex:none;display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font:9px var(--mono);letter-spacing:.14em;color:#b3afc4}
+.card-top #c-num{color:var(--purple)}
+.photo-zone{position:relative;flex:1;min-height:100px;display:grid;place-items:center;overflow:hidden;background:#16151f;border-bottom:1px dashed #ffffff26}
+.photo-zone img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.photo-zone.drop{outline:1px dashed var(--lavender);outline-offset:-8px;background:#25223a}
+.ph{text-align:center;color:#8a869c;font-size:10px;padding:12px}
+.ph b{display:block;margin-bottom:8px;color:#bdb8d6;font:500 9px var(--mono);letter-spacing:.16em}
+.card-body{flex:none;padding:14px 16px 16px}
+.c-name{margin:0;font:500 clamp(15px,1.7vw,20px)/1.3 var(--sans)}
+.years{margin:4px 0 8px;font:10px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+.desc{margin:0;color:#b3b0c3;font-size:12px;line-height:1.7}
+[contenteditable]{outline:none;cursor:text;border-bottom:1px solid transparent}
+[contenteditable]:hover{border-bottom-color:#a5a0e844}[contenteditable]:focus{border-bottom-color:var(--lavender)}
+.card-actions{display:flex;align-items:center;gap:10px;margin-top:12px}
+.edit-note{margin-right:auto;font:8px var(--mono);letter-spacing:.1em;color:#6f6b84}
+.card-actions button{border:1px solid #ffffff2a;background:transparent;color:var(--text);padding:9px 14px;font:9px var(--mono);letter-spacing:.14em;cursor:pointer;transition:border-color .2s}
+.card-actions button:hover{border-color:var(--lavender)}
+
+/* EDGE PREVIOUS / NEXT (appear on hover) */
+.edge{position:fixed;z-index:2;top:var(--nav-h);bottom:0;width:clamp(110px,16vw,230px);border:0;
+  display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(14px,3vw,44px);cursor:pointer;opacity:0;transition:opacity .3s;
+  background:linear-gradient(to right,#a5a0e81f,transparent)}
+.edge-left{left:0} .edge-right{right:0;justify-content:flex-end;padding-left:0;padding-right:clamp(14px,3vw,44px);background:linear-gradient(to left,#a5a0e81f,transparent)}
+.edge:hover,.edge:focus-visible{opacity:1}
+.edge span{width:46px;height:46px;border:1px solid #c3bdf766;border-radius:50%;display:grid;place-items:center;
+  color:var(--lavender);font:22px/1 var(--mono);background:#1d1c2dcc;transition:transform .25s,border-color .25s}
+.edge:hover span{border-color:var(--lavender)}
+.edge-left:hover span{transform:translateX(3px)} .edge-right:hover span{transform:translateX(-3px)}
+@media (hover:none){.edge{opacity:.55}}
+
+/* ANIMATIONS */
+@keyframes portraitAppear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes revealPortrait{to{clip-path:inset(0)}}
+@keyframes networkDrift{from{background-position:0 0,0 0,0 0}to{background-position:92px 84px,24px -18px,-18px 22px}}
+@keyframes ledBlink{0%,100%{opacity:.28}42%{opacity:.62}48%{opacity:.2}54%{opacity:.55}}
+@keyframes cursorBlink{0%,48%{opacity:1}49%,100%{opacity:0}}
+
+/* RESPONSIVE */
+@media (max-width:800px){
+  .home-layout{padding:var(--nav-h) 5vw 0;gap:3vw}
+  .name{font-size:clamp(22px,4vw,39px);letter-spacing:.04em}
+}
+@media (max-width:640px){
+  :root{--nav-h:52px;--stage-h:38vh;--name-offset:0;--lift:0;--img-lift:0}
+  .screen.active#home{overflow-y:auto}
+  .home-layout{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:10px;height:auto;min-height:100%;transform:none}
+  .name-side{height:auto}
+  .name{font-size:clamp(20px,6.4vw,30px);letter-spacing:.03em}
+  .tagline{font-size:9px;margin-top:8px;letter-spacing:.08em}
+  .orbit{width:140%}
+  .edu{overflow-y:auto;pointer-events:auto}
+  .edu-hint{display:none}
+  .edu-body{grid-template-columns:1fr;grid-auto-rows:minmax(300px,auto);flex:none}
+  .map-panel{height:42vh}
+  .school-card{min-height:440px}
+  .edge{width:84px;padding-left:10px}.edge-right{padding-right:10px}.edge span{width:36px;height:36px;font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.cursor-glow{display:none}}
+</style>
+</head>
+<body>
+<div class="background"></div>
+
+<!-- TOP NAVIGATION -->
+<nav class="navigation" aria-label="Portfolio navigation">
+  <button class="nav-button current" data-page="home">HOME</button>
+  <button class="nav-button" data-page="education">EDUCATION</button>
+</nav>
+
+<!-- HOME -->
+<section class="screen active" id="home">
+  <main class="home-layout">
+    <div class="portrait-stage">
+      <div class="portrait-glow"></div>
+      <div class="orbit"></div>
+      <div class="orbit orbit-two"></div>
+      <span class="marker marker-one">+</span>
+      <span class="marker marker-two">+</span>
+      <div class="portrait-frame">
+        <img class="portrait-layer portrait-base" referrerpolicy="no-referrer" alt="" src="meme.png">
+        <img class="portrait-layer portrait-color" referrerpolicy="no-referrer" alt="Portrait of Hannah Mae B. Pacio" src="meme.png">
+      </div>
+    </div>
+
+    <div class="name-side">
+      <h1 class="name" aria-label="Hannah Mae B. Pacio">
+        <span class="name-first" id="name-first">HANNAH MAE</span>
+        <span class="name-second" id="name-second">B. PACIO</span>
+      </h1>
+
+      <div class="tagline" id="tagline" aria-label="Computer Science student, an aspiring Cybersecurity and tech entrepreneur. Defending Systems. Building Solutions.">
+        <span data-text="Computer Science student"></span>
+        <span data-text="an aspiring Cybersecurity and tech entrepreneur"></span>
+        <span class="tag-motto" data-text="Defending Systems. Building Solutions."></span>
+      </div>
+
+      <div class="loader" id="loader">
+        <div class="loader-meta"><span id="status">INITIALIZING PROFILE</span><span id="percent">00%</span></div>
+        <div class="track"><div class="fill" id="fill"></div></div>
+      </div>
+      <a class="explore-link" id="explore-link" href="#education">Explore Portfolio <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </main>
+</section>
+
+<!-- EDUCATION -->
+<section class="screen" id="education">
+  <div class="edu">
+    <header class="edu-head">
+      <div>
+        <p class="page-kicker">EDUCATION / ROUTE 01 &rarr; 04</p>
+        <h1 class="page-title">Mapping my <em>education journey.</em></h1>
+      </div>
+      <p class="edu-hint">Select a stop to view its details.<br>Drop a picture on the card to add it.</p>
+    </header>
+
+    <div class="edu-body">
+      <div class="map-panel">
+        <span class="map-tag tl">EDUCATION MAP</span>
+        <span class="map-tag br">N &uarr;</span>
+        <svg class="map-svg" viewBox="0 0 640 380" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Education route map">
+          <ellipse class="topo" cx="470" cy="120" rx="170" ry="85"/><ellipse class="topo" cx="470" cy="120" rx="115" ry="55"/>
+          <ellipse class="topo" cx="150" cy="290" rx="150" ry="75"/><ellipse class="topo" cx="150" cy="290" rx="95" ry="45"/>
+          <path class="route-base" d="M70 300 C150 300 160 150 260 150 S370 270 450 270 S540 90 580 90"/>
+          <path class="route-flow" d="M70 300 C150 300 160 150 260 150 S370 270 450 270 S540 90 580 90"/>
+
+          <g class="pin sel" data-i="0" tabindex="0" role="button" transform="translate(70 300)">
+            <circle class="pulse" r="9"/><circle class="ring" r="9"/><circle class="dot" r="3.5"/>
+            <text class="lbl" y="30"><tspan class="l-name" x="-9"></tspan><tspan class="l-years" x="-9" dy="14"></tspan></text>
+          </g>
+          <g class="pin" data-i="1" tabindex="0" role="button" transform="translate(260 150)">
+            <circle class="pulse" r="9"/><circle class="ring" r="9"/><circle class="dot" r="3.5"/>
+            <text class="lbl" y="-28" text-anchor="middle"><tspan class="l-name" x="0"></tspan><tspan class="l-years" x="0" dy="14"></tspan></text>
+          </g>
+          <g class="pin" data-i="2" tabindex="0" role="button" transform="translate(450 270)">
+            <circle class="pulse" r="9"/><circle class="ring" r="9"/><circle class="dot" r="3.5"/>
+            <text class="lbl" y="30" text-anchor="middle"><tspan class="l-name" x="0"></tspan><tspan class="l-years" x="0" dy="14"></tspan></text>
+          </g>
+          <g class="pin" data-i="3" tabindex="0" role="button" transform="translate(580 90)">
+            <circle class="pulse" r="9"/><circle class="ring" r="9"/><circle class="dot" r="3.5"/>
+            <text class="lbl" y="30" text-anchor="end"><tspan class="l-name" x="9"></tspan><tspan class="l-years" x="9" dy="14"></tspan></text>
+          </g>
+        </svg>
+      </div>
+
+      <article class="school-card" id="school-card">
+        <div class="card-top"><span id="c-cat"></span><span id="c-num"></span></div>
+        <div class="photo-zone" id="photo-zone">
+          <img id="c-img" alt="" hidden>
+          <div class="ph" id="c-ph"><b>PICTURE</b>Drop an image here or press ADD PHOTO</div>
+        </div>
+        <div class="card-body">
+          <h2 class="c-name" id="c-name" contenteditable="plaintext-only" spellcheck="false"></h2>
+          <p class="years" id="c-years" contenteditable="plaintext-only" spellcheck="false"></p>
+          <p class="desc" id="c-desc" contenteditable="plaintext-only" spellcheck="false"></p>
+          <div class="card-actions">
+            <span class="edit-note">TEXT IS EDITABLE</span>
+            <button id="rm-btn" hidden>REMOVE</button>
+            <button id="add-btn">ADD PHOTO</button>
+            <input type="file" id="file-input" accept="image/*" hidden>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- EDGE BUTTONS: hover the left or right side of the screen -->
+<button class="edge edge-left" id="prev" aria-label="Previous page" hidden><span>&#8249;</span></button>
+<button class="edge edge-right" id="next" aria-label="Next page" hidden><span>&#8250;</span></button>
+
+<script>
+const ids = ["home", "education"];
+const pages = ids.map(id => document.getElementById(id));
+const navButtons = [...document.querySelectorAll(".nav-button")];
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const exploreLink = document.getElementById("explore-link");
+let currentIndex = 0;
+
+function showPage(id) {
+  const i = ids.indexOf(id);
+  if (i < 0) return;
+  currentIndex = i;
+  pages.forEach(p => p.classList.toggle("active", p.id === id));
+  navButtons.forEach(b => {
+    const on = b.dataset.page === id;
+    b.classList.toggle("current", on);
+    on ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current");
+  });
+  prevBtn.hidden = i === 0;
+  nextBtn.hidden = i === 0 || i === ids.length - 1;
+  history.replaceState(null, "", "#" + id);
+}
+
+navButtons.forEach(b => b.addEventListener("click", () => showPage(b.dataset.page)));
+exploreLink.addEventListener("click", e => {
+  e.preventDefault();
+  showPage("education");
+});
+prevBtn.addEventListener("click", () => showPage(ids[currentIndex - 1]));
+nextBtn.addEventListener("click", () => showPage(ids[currentIndex + 1]));
+document.addEventListener("keydown", e => {
+  if (e.target.isContentEditable) return;
+  if (e.key === "ArrowRight" && currentIndex < ids.length - 1) showPage(ids[currentIndex + 1]);
+  if (e.key === "ArrowLeft" && currentIndex > 0) showPage(ids[currentIndex - 1]);
+  if (e.key === "Escape") showPage("home");
+});
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.addEventListener("pointermove", e => {
+    const x = e.clientX / window.innerWidth * 2 - 1;
+    const y = e.clientY / window.innerHeight * 2 - 1;
+    document.documentElement.style.setProperty("--mouse-x", x.toFixed(3));
+    document.documentElement.style.setProperty("--mouse-y", y.toFixed(3));
+    document.documentElement.style.setProperty("--cursor-x", e.clientX);
+    document.documentElement.style.setProperty("--cursor-y", e.clientY);
+  });
+  document.addEventListener("pointerleave", () => {
+    document.documentElement.style.setProperty("--mouse-x", "0");
+    document.documentElement.style.setProperty("--mouse-y", "0");
+  });
+}
+
+/* DECODING TEXT (shared by the name and the tagline) */
+const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>/";
+const rand = () => chars[Math.floor(Math.random() * chars.length)];
+
+function decode(lines, targets, duration, delay) {
+  setTimeout(() => {
+    const start = performance.now();
+    (function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      lines.forEach((line, n) => {
+        const shown = Math.floor(p * line.length);
+        targets[n].textContent = [...line].map((c, i) =>
+          c === " " || i < shown || p === 1 ? c : rand()
+        ).join("");
+      });
+      if (p < 1) requestAnimationFrame(frame);
+    })(start);
+  }, delay);
+}
+
+/* name and tagline decode together and finish together */
+decode(["HANNAH MAE", "B. PACIO"],
+  [document.getElementById("name-first"), document.getElementById("name-second")], 2400, 0);
+
+const tagLines = [...document.querySelectorAll("#tagline span")];
+decode(tagLines.map(s => s.dataset.text), tagLines, 2400, 0);
+
+/* LOADING BAR (same 2.4s as both decodings) */
+const fill = document.getElementById("fill");
+const percent = document.getElementById("percent");
+const status = document.getElementById("status");
+const loader = document.getElementById("loader");
+
+(function runLoader() {
+  const start = performance.now();
+  (function frame(now) {
+    const p = Math.min((now - start) / 2400, 1);
+    fill.style.width = p * 100 + "%";
+    percent.textContent = String(Math.floor(p * 100)).padStart(2, "0") + "%";
+    if (p < 1) return requestAnimationFrame(frame);
+    percent.textContent = "100%";
+    status.textContent = "PROFILE READY";
+    setTimeout(() => {
+      loader.classList.add("fade");
+      exploreLink.classList.add("ready");
+    }, 1200);
+  })(start);
+})();
+
+/* EDUCATION MAP ---------------------------------------------------------
+   Permanent edits: change the text below and put your images in an "assets"
+   folder using the file names given (school1.jpg to school4.jpg).
+   Edits made in the browser (typing, drag-and-drop) are saved on this
+   device only; they do not change the website for other visitors.        */
+const SCHOOLS = [
+  { level: "ELEMENTARY",  name: "Josefa Cariño Elementary School",           years: "2018 - 2020",
+    desc: "Just having fun with singing  and volleyball.",
+    photo: "elem.png" },
+  { level: "JUNIOR HIGH", name: "Pines City National High School",          years: "2020 - 2024",
+    desc: "Faith began. Developed guitar and art skill. A time when my mind was challenged, and I learned lessons I still carry.",
+    photo: "jr.png" },
+  { level: "SENIOR HIGH", name: "Saint Louis School Incorporated",          years: "2024 - 2026",
+    desc: "Intelligence developed and hard lessons with people learned. A breaking point  led to restoration, and a hunger for life and purpose.",
+    photo: "Scan_me.png" },
+  { level: "COLLEGE",     name: "University of the Cordilleras", years: "Present",
+    desc: "BS Computer Science. Building a technical foundation toward cybersecurity and tech entrepreneurship.",
+    photo: "images (1).jpg" }
+];
+
+/* EDIT_MODE = true  : you can type, add and remove pictures in the browser (preview).
+   EDIT_MODE = false : the public version. No add/remove buttons, no editing,
+                       and only the text and assets/ pictures in this file are shown. */
+const EDIT_MODE = false;
+
+const STORE_KEY = "hmp-education-v1";
+let saved = {};
+if (EDIT_MODE) { try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch (e) {} }
+const getVal = (i, f) => (saved[i] && saved[i][f] !== undefined) ? saved[i][f] : SCHOOLS[i][f];
+function setVal(i, f, v) {
+  (saved[i] = saved[i] || {})[f] = v;
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); }
+  catch (e) { alert("Browser storage is full. Use smaller images, or place them in the assets folder."); }
+}
+
+const pins = [...document.querySelectorAll(".pin")];
+const cName = document.getElementById("c-name"), cYears = document.getElementById("c-years"), cDesc = document.getElementById("c-desc");
+const cImg = document.getElementById("c-img"), cPh = document.getElementById("c-ph");
+const zone = document.getElementById("photo-zone"), fileInput = document.getElementById("file-input");
+const addBtn = document.getElementById("add-btn"), rmBtn = document.getElementById("rm-btn");
+let sel = 0;
+const kind = "photo";
+
+function paintPin(i) {
+  const p = pins[i];
+  p.querySelector(".l-name").textContent = getVal(i, "name");
+  p.querySelector(".l-years").textContent = getVal(i, "years");
+}
+function paintImage() {
+  const src = getVal(sel, kind);
+  cImg.onload = () => { cImg.hidden = false; cPh.hidden = true; rmBtn.hidden = !EDIT_MODE; };
+  cImg.onerror = () => { cImg.hidden = true; cPh.hidden = false; rmBtn.hidden = true; };
+  cImg.hidden = true; cPh.hidden = false; rmBtn.hidden = true;
+  if (src) cImg.src = src; else cImg.removeAttribute("src");
+}
+function selectSchool(i) {
+  sel = i;
+  pins.forEach((p, n) => p.classList.toggle("sel", n === i));
+  document.getElementById("c-cat").textContent = "STOP " + String(i + 1).padStart(2, "0") + " / " + SCHOOLS[i].level;
+  document.getElementById("c-num").textContent = String(i + 1).padStart(2, "0");
+  cName.textContent = getVal(i, "name"); cYears.textContent = getVal(i, "years"); cDesc.textContent = getVal(i, "desc");
+  paintImage();
+}
+pins.forEach((p, i) => {
+  paintPin(i);
+  p.addEventListener("click", () => selectSchool(i));
+  p.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectSchool(i); } });
+});
+/* editable text: saved as you type, map labels update live, Enter ends a line edit */
+[[cName, "name"], [cYears, "years"], [cDesc, "desc"]].forEach(([el, field]) => {
+  el.addEventListener("input", () => { setVal(sel, field, el.textContent.trim()); if (field !== "desc") paintPin(sel); });
+  el.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); el.blur(); } });
+});
+
+/* images: shrunk to max 1100px so they fit in browser storage */
+function loadImageFile(file) {
+  if (!EDIT_MODE || !file || !file.type.startsWith("image/")) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const k = Math.min(1, 1100 / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      setVal(sel, kind, c.toDataURL("image/jpeg", 0.85));
+      paintImage();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+addBtn.addEventListener("click", () => fileInput.click());
+fileInput.addEventListener("change", () => { loadImageFile(fileInput.files[0]); fileInput.value = ""; });
+rmBtn.addEventListener("click", () => { setVal(sel, kind, ""); paintImage(); });
+["dragenter", "dragover"].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add("drop"); }));
+["dragleave", "drop"].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove("drop"); }));
+zone.addEventListener("drop", e => loadImageFile([...e.dataTransfer.files].find(f => f.type.startsWith("image/"))));
+document.getElementById("school-card").addEventListener("drop", e => { e.preventDefault(); loadImageFile([...e.dataTransfer.files].find(f => f.type.startsWith("image/"))); });
+document.addEventListener("dragover", e => e.preventDefault());
+document.addEventListener("drop", e => e.preventDefault());
+if (!EDIT_MODE) {
+  [cName, cYears, cDesc].forEach(el => el.removeAttribute("contenteditable"));
+  addBtn.hidden = true; rmBtn.style.display = "none";
+  document.querySelector(".edit-note").hidden = true;
+  document.querySelector(".edu-hint").innerHTML = "Select a stop to view its details.";
+  cPh.innerHTML = "<b>PICTURE</b>";
+}
+selectSchool(0);
+
+/* INITIAL PAGE FROM URL HASH */
+const initial = location.hash.slice(1);
+if (ids.includes(initial)) showPage(initial);
+</script>
+</body>
+</html>
