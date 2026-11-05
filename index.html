@@ -108,7 +108,7 @@ button{font:inherit}
 .marker{position:absolute;z-index:5;color:var(--lavender);font:14px var(--mono);opacity:.7}
 .marker-one{top:15%;left:12%} .marker-two{top:54%;right:3%}
 
-.portrait-frame{position:relative;isolation:isolate;translate:0 calc(var(--stage-h) * var(--img-lift) * -1);width:100%;height:100%;max-width:470px;
+.portrait-frame{position:relative;isolation:isolate;overflow:hidden;translate:0 calc(var(--stage-h) * var(--img-lift) * -1);width:100%;height:100%;max-width:470px;
   display:flex;align-items:center;justify-content:center;animation:portraitAppear 1.2s ease both}
 .portrait-layer{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;
   object-position:center bottom;
@@ -116,9 +116,13 @@ button{font:inherit}
   -webkit-mask-composite:source-in;
   mask-image:linear-gradient(to bottom,transparent 0%,transparent 8%,#000 20%),linear-gradient(to right,transparent 0%,#0003 6%,#000 20%,#000 80%,#0003 94%,transparent 100%);
   mask-composite:intersect}
-.portrait-base{z-index:1;opacity:.48;filter:grayscale(100%) contrast(1.08) brightness(.9)}
-.portrait-color{z-index:2;clip-path:inset(100% 0 0 0);filter:contrast(1.02) saturate(.88);
-  animation:revealPortrait 2.4s ease-out forwards}
+.portrait-base{z-index:1;opacity:.48;clip-path:inset(0 0 100% 0);
+  filter:grayscale(100%) contrast(1.08) brightness(.9);animation:revealPortrait 2.4s ease-out forwards}
+.portrait-color{z-index:2;clip-path:inset(0);opacity:0;filter:contrast(1.02) saturate(.88);
+  animation:colorFadeUp .9s ease-out 2.4s forwards}
+.portrait-frame::after{content:"";position:absolute;z-index:4;left:6%;right:6%;top:-3%;height:2px;
+  background:linear-gradient(90deg,transparent,#c3bdf7aa 22%,#fff 50%,#c3bdf7aa 78%,transparent);
+  box-shadow:0 3px 4px #fff,0 7px 12px #c3bdf7,0 14px 22px #a5a0e866;pointer-events:none;animation:portraitScan 2.4s ease-in-out forwards}
 
 /* NAME SIDE: starts at the top of the portrait so the name sits at head level */
 .name-side{position:relative;z-index:7;min-width:0;height:var(--stage-h);
@@ -135,7 +139,8 @@ button{font:inherit}
 .tagline span{display:block;min-height:2em}
 .tagline .tag-motto{color:var(--cyan)}
 .tagline::after{content:"_";display:inline-block;margin-left:4px;color:var(--lavender);
-  animation:cursorBlink 1s steps(1,end) infinite}
+  opacity:0}
+.tagline.cursor-ready::after{animation:cursorBlink 1s steps(1,end) infinite}
 
 .loader{width:min(320px,85%);margin-top:26px;transition:opacity .8s ease,filter .8s ease}
 .loader.fade{opacity:0;filter:blur(6px)}
@@ -216,9 +221,14 @@ button{font:inherit}
 /* ANIMATIONS */
 @keyframes portraitAppear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes revealPortrait{to{clip-path:inset(0)}}
+@keyframes colorFadeUp{
+  0%{opacity:0;clip-path:inset(100% 0 0 0);filter:contrast(1.08) saturate(.55) brightness(1.15)}
+  100%{opacity:1;clip-path:inset(0);filter:contrast(1.02) saturate(.88) brightness(1)}
+}
 @keyframes networkDrift{from{background-position:0 0,0 0,0 0}to{background-position:92px 84px,24px -18px,-18px 22px}}
 @keyframes ledBlink{0%,100%{opacity:.28}42%{opacity:.62}48%{opacity:.2}54%{opacity:.55}}
 @keyframes cursorBlink{0%,48%{opacity:1}49%,100%{opacity:0}}
+@keyframes portraitScan{0%{top:0;opacity:1}100%{top:100%;opacity:0}}
 
 /* RESPONSIVE */
 @media (max-width:800px){
@@ -245,6 +255,7 @@ button{font:inherit}
 </head>
 <body>
 <div class="background"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
 
 <!-- TOP NAVIGATION -->
 <nav class="navigation" aria-label="Portfolio navigation">
@@ -273,9 +284,9 @@ button{font:inherit}
         <span class="name-second" id="name-second">B. PACIO</span>
       </h1>
 
-      <div class="tagline" id="tagline" aria-label="Computer Science student, an aspiring Cybersecurity and tech entrepreneur. Defending Systems. Building Solutions.">
+      <div class="tagline" id="tagline" aria-label="Computer Science student, an aspiring Cybersecurity Specialist and Tech Entrepreneur. Defending Systems. Building Solutions.">
         <span data-text="Computer Science student"></span>
-        <span data-text="an aspiring Cybersecurity and tech entrepreneur"></span>
+        <span data-text="an aspiring Cybersecurity Specialist and Tech Entrepreneur"></span>
         <span class="tag-motto" data-text="Defending Systems. Building Solutions."></span>
       </div>
 
@@ -411,7 +422,7 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ{}[]<>/";
 const rand = () => chars[Math.floor(Math.random() * chars.length)];
 
-function decode(lines, targets, duration, delay) {
+function decode(lines, targets, duration, delay, onComplete) {
   setTimeout(() => {
     const start = performance.now();
     (function frame(now) {
@@ -422,7 +433,8 @@ function decode(lines, targets, duration, delay) {
           c === " " || i < shown || p === 1 ? c : rand()
         ).join("");
       });
-      if (p < 1) requestAnimationFrame(frame);
+      if (p < 1) return requestAnimationFrame(frame);
+      if (onComplete) onComplete();
     })(start);
   }, delay);
 }
@@ -432,7 +444,8 @@ decode(["HANNAH MAE", "B. PACIO"],
   [document.getElementById("name-first"), document.getElementById("name-second")], 2400, 0);
 
 const tagLines = [...document.querySelectorAll("#tagline span")];
-decode(tagLines.map(s => s.dataset.text), tagLines, 2400, 0);
+decode(tagLines.map(s => s.dataset.text), tagLines, 2400, 0,
+  () => document.getElementById("tagline").classList.add("cursor-ready"));
 
 /* LOADING BAR (same 2.4s as both decodings) */
 const fill = document.getElementById("fill");
