@@ -156,6 +156,34 @@ button{font:inherit}
 .explore-link.ready{opacity:1;transform:translateY(0);pointer-events:auto}
 .explore-link:hover,.explore-link:focus-visible{background:var(--lavender);color:#171321;box-shadow:0 0 16px #a5a0e866;outline:none}
 
+/* ABOUT ME: biography and interests in glass-like panels */
+.about-layout{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(18px,3vh,30px);
+  padding:calc(var(--nav-h) + clamp(18px,4vh,40px)) 7vw clamp(22px,4vh,40px)}
+.about-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.about-index{margin:0;color:var(--lavender);font:10px var(--mono);letter-spacing:.14em}
+.about-index span{color:#77748d}
+.about-grid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(18px,3vw,42px)}
+.about-panel{position:relative;min-height:0;overflow:hidden;border:1px solid #c3bdf72b;
+  background:linear-gradient(135deg,#332e4a8c,#191824b8 72%);box-shadow:inset 0 1px #ffffff12;
+  backdrop-filter:blur(8px)}
+.about-panel::after{content:"";position:absolute;inset:14px;pointer-events:none;border:1px solid #ffffff08}
+.panel-label{position:relative;z-index:1;display:flex;gap:14px;padding:18px 22px;
+  border-bottom:1px solid #ffffff16;color:var(--lavender);font:9px var(--mono);letter-spacing:.16em}
+.panel-label span{color:var(--cyan)}
+.panel-copy{position:relative;z-index:1;padding:clamp(22px,3vw,42px) clamp(22px,3.2vw,46px) 20px}
+.panel-copy p{margin:0 0 20px;color:#c5c2d2;font-size:clamp(11px,1.05vw,14px);line-height:1.9}
+.panel-copy p:last-child{margin-bottom:0}
+.goal-block{position:absolute;z-index:1;left:clamp(22px,3.2vw,46px);right:clamp(22px,3.2vw,46px);bottom:clamp(22px,3vw,42px);
+  padding:16px 18px;border-left:2px solid var(--purple);background:#8170c50e}
+.mini-label{margin:0 0 8px;color:var(--cyan);font:9px var(--mono);letter-spacing:.16em}
+.goal-block p:last-child{margin:0;color:#ddd9ee;font-size:11px;line-height:1.7}
+.interest-list{position:relative;z-index:1;display:flex;flex-direction:column;gap:0;margin:0;padding:4px 22px 18px;list-style:none}
+.interest-list li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:15px 0;border-bottom:1px solid #ffffff12}
+.interest-list li:last-child{border-bottom:0}
+.interest-number{color:var(--purple);font:10px var(--mono);padding-top:3px}
+.interest-list h2{margin:0 0 5px;color:#f2effb;font:500 clamp(12px,1.2vw,15px) var(--sans)}
+.interest-list p{margin:0;color:#aaa7bb;font-size:11px;line-height:1.55}
+
 /* EDUCATION: route map + detail card (single page, no scrolling) */
 .edu{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(10px,2vh,22px);
   padding:calc(var(--nav-h) + clamp(14px,3vh,30px)) 7vw clamp(14px,3vh,30px);pointer-events:none}
@@ -240,6 +268,15 @@ button{font:inherit}
   .name{font-size:clamp(20px,6.4vw,30px);letter-spacing:.03em}
   .tagline{font-size:9px;margin-top:8px;letter-spacing:.08em}
   .orbit{width:140%}
+  .about-layout{position:relative;min-height:100%;height:auto;overflow-y:auto;padding:calc(var(--nav-h) + 18px) 6vw 84px}
+  .about-head{align-items:flex-start}
+  .about-head .page-title{font-size:clamp(25px,8vw,38px)}
+  .about-grid{display:flex;flex-direction:column;min-height:0}
+  .about-panel{overflow:visible}
+  .biography-panel{min-height:650px}
+  .interests-panel{min-height:540px}
+  .panel-copy{padding:24px 22px 170px}
+  .goal-block{bottom:22px}
   .edu{overflow-y:auto;pointer-events:auto}
   .edu-hint{display:none}
   .edu-body{grid-template-columns:1fr;grid-auto-rows:minmax(300px,auto);flex:none}
@@ -257,6 +294,7 @@ button{font:inherit}
 <!-- TOP NAVIGATION -->
 <nav class="navigation" aria-label="Portfolio navigation">
   <button class="nav-button current" data-page="home">HOME</button>
+  <button class="nav-button" data-page="about">ABOUT ME</button>
   <button class="nav-button" data-page="education">EDUCATION</button>
 </nav>
 
@@ -291,7 +329,45 @@ button{font:inherit}
         <div class="loader-meta"><span id="status">INITIALIZING PROFILE</span><span id="percent">00%</span></div>
         <div class="track"><div class="fill" id="fill"></div></div>
       </div>
-      <a class="explore-link" id="explore-link" href="#education">Explore Portfolio <span aria-hidden="true">&rarr;</span></a>
+      <a class="explore-link" id="explore-link" href="#about">Explore Portfolio <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </main>
+</section>
+
+<!-- ABOUT ME -->
+<section class="screen" id="about">
+  <main class="about-layout">
+    <header class="about-head">
+      <div>
+        <p class="page-kicker">ABOUT ME / PROFILE 02</p>
+        <h1 class="page-title">Curious by nature.<br><em>Purpose-driven by choice.</em></h1>
+      </div>
+      <p class="about-index">02 <span>/ 03</span></p>
+    </header>
+
+    <div class="about-grid">
+      <article class="about-panel biography-panel">
+        <div class="panel-label"><span>01</span> BIOGRAPHY</div>
+        <div class="panel-copy">
+          <p>A Computer Science student developing foundations in programming, digital logic, and technology, with growing interests in cybersecurity, software development, hardware, and automation. A curious, practical, and purpose-driven learner who enjoys understanding how systems work, solving problems, and exploring ways to build secure and useful technological solutions.</p>
+          <p>Aspires to become a cybersecurity professional and technology entrepreneur, combining technical knowledge, creativity, and entrepreneurial thinking to develop products and solutions that address real-world needs.</p>
+        </div>
+        <div class="goal-block">
+          <p class="mini-label">OVERALL GOAL</p>
+          <p>To become a cybersecurity professional and technology entrepreneur who can protect digital systems, build practical technology, develop innovative products, and create meaningful solutions that benefit others.</p>
+        </div>
+      </article>
+
+      <article class="about-panel interests-panel">
+        <div class="panel-label"><span>02</span> HOBBIES &amp; INTERESTS</div>
+        <ul class="interest-list">
+          <li><span class="interest-number">01</span><div><h2>Sports &amp; Fitness</h2><p>Volleyball, footvolley, and functional fitness.</p></div></li>
+          <li><span class="interest-number">02</span><div><h2>Creative Arts</h2><p>Sketching, drawing, and acoustic guitar.</p></div></li>
+          <li><span class="interest-number">03</span><div><h2>Technology &amp; Innovation</h2><p>Computer Science, cybersecurity, software development, hardware, automation, and entrepreneurship.</p></div></li>
+          <li><span class="interest-number">04</span><div><h2>Intellectual Development</h2><p>Psychology, human behavior, communication, logical reasoning, and problem-solving.</p></div></li>
+          <li><span class="interest-number">05</span><div><h2>Personal Growth &amp; Values</h2><p>Biblical study, Christian formation, character development, discipline, wisdom, and personal responsibility.</p></div></li>
+        </ul>
+      </article>
     </div>
   </main>
 </section>
@@ -363,7 +439,7 @@ button{font:inherit}
 <button class="edge edge-right" id="next" aria-label="Next page" hidden><span>&#8250;</span></button>
 
 <script>
-const ids = ["home", "education"];
+const ids = ["home", "about", "education"];
 const pages = ids.map(id => document.getElementById(id));
 const navButtons = [...document.querySelectorAll(".nav-button")];
 const prevBtn = document.getElementById("prev");
@@ -389,7 +465,7 @@ function showPage(id) {
 navButtons.forEach(b => b.addEventListener("click", () => showPage(b.dataset.page)));
 exploreLink.addEventListener("click", e => {
   e.preventDefault();
-  showPage("education");
+  showPage("about");
 });
 prevBtn.addEventListener("click", () => showPage(ids[currentIndex - 1]));
 nextBtn.addEventListener("click", () => showPage(ids[currentIndex + 1]));
