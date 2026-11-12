@@ -14,15 +14,14 @@ HOMEPAGE
 - Loading bar runs with the name reveal.
 
 PERSONAL INFORMATION
-- Text paragraphs marked editable can be clicked and edited for a quick in-browser preview.
-- To make edits permanent, open index.html in a code editor and change the text inside those elements.
+- Includes contact details, a short biography, and hobbies/interests.
 
 ACHIEVEMENTS
-- Solar-system-inspired interactive page.
-- Select orbit nodes to change the learning milestone.
-- Edit the selected title and description in the browser preview; edit index.html for permanent changes.
-- Drag an image onto the solar system/achievement card or use ADD PHOTO to preview a certificate/course image.
-- Browser-selected/dragged photos are temporary previews and do not automatically save into the website files. For permanent publication, place image files in assets and update the relevant HTML, or ask for help.
+- Two horizontal timelines: Academic Achievements and Extra Curricular Achievements.
+- Click a stop to view its achievement details and large photo preview. Once a stop has at least one photo, use the visible previous/next arrows in the preview to browse its photos.
+- To edit achievement details or add photos, update the ACHIEVEMENTS data in index.html. Add as many image paths as needed to that stop's photos array (for example: photos: ["elem.png", "assets/award.jpg"]).
+- There are no public photo-upload controls; website visitors can only view the photos.
+- Add image files to the website and update the matching photos array for changes to appear for all visitors.
 
 FAMILY
 - Prepared layout with editable text and photo upload/drag-drop preview.
@@ -39,4 +38,4 @@ DEPLOY TO CLOUDFLARE PAGES
 NOTES
 - The pages use horizontal transitions; small screens may allow vertical scrolling within content pages to keep text accessible.
 - Google Fonts are loaded online; the page still has fallback fonts.
-- This is an editable starter design. Drag-and-drop photo previews do not persist after refresh until image files are added to the site.
+- Achievement edits are made in index.html and appear after the updated page is published.
