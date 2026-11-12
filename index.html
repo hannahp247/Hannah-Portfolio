@@ -70,6 +70,7 @@ button{font:inherit}
   border-bottom:1px solid #ffffff14;background:#1d1c2dee;backdrop-filter:blur(6px)}
 .nav-button{position:relative;border:0;padding:8px 2px;background:transparent;color:#858294;
   font:11px var(--mono);letter-spacing:.14em;cursor:pointer}
+.nav-button[data-page="about"]{font-size:12px}
 .nav-button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--lavender);
   transform:scaleX(0);transition:transform .3s}
 .nav-button:hover,.nav-button.current{color:var(--text)}
@@ -254,6 +255,7 @@ button{font:inherit}
   :root{--nav-h:52px;--stage-h:38vh;--name-offset:0;--lift:0;--img-lift:0}
   .navigation{gap:clamp(12px,4vw,24px);padding:0 12px}
   .nav-button{font-size:clamp(8px,2.4vw,10px);letter-spacing:.06em}
+  .nav-button[data-page="about"]{font-size:clamp(9px,2.7vw,11px)}
   .screen.active#home{overflow-y:auto}
   .home-layout{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:10px;height:auto;min-height:100%;transform:none}
   .name-side{height:auto}
@@ -554,8 +556,8 @@ const loader = document.getElementById("loader");
 const ACHIEVEMENTS = {
   academic: [
     { name: "Elementary Certificate of Completion (Elementary Graduation) with Conduct Award.", photos: ["elem final.png"] },
-    { name: "Junior High School Certificate of Completion (Moving Up) with a consistent academic excellence from 8th to 10th grade.", photos: ["jr high final.png"] },
-    { name: " Senior High School Diploma (Graduation) with a consistent louisian achiever award.", photos: ["sr high final.png"] }
+    { name: "Junior High School Certificate of Completion (Moving Up) with Consistent Academic Excellence from 8th to 10th grade.", photos: ["jr high final.png"] },
+    { name: " Senior High School Diploma (Graduation) with consistent Honors and Louisian Achiever Award.", photos: ["sr high final.png"] }
   ],
   extracurricular: [
     {
