@@ -193,40 +193,29 @@ button{font:inherit}
 .interest-list p{margin:0;color:#aaa7bb;font-size:11px;line-height:1.55}
 
 /* ACHIEVEMENTS */
-.achievements{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);align-items:stretch;gap:clamp(12px,2vh,20px);
-  padding:calc(var(--nav-h) + clamp(12px,2.4vh,24px)) 7vw 20px;overflow-y:auto;pointer-events:auto}
+.achievements{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);align-items:stretch;gap:clamp(10px,1.5vh,16px);
+  padding:calc(var(--nav-h) + clamp(10px,1.8vh,18px)) 7vw 16px;overflow:hidden;pointer-events:auto}
 .achievements-head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
 .page-kicker{margin:0 0 8px;color:var(--purple);font:9px var(--mono);letter-spacing:.16em}
 .page-title{margin:0;font-size:clamp(28px,5.4vh,54px);line-height:1.1;font-weight:300;letter-spacing:-.05em}
 .page-title em{color:var(--lavender);font-family:Georgia,serif;font-weight:400}
-.achievement-group{display:flex;flex-direction:column;min-height:0;border:1px solid #c3bdf72b;background:linear-gradient(135deg,#332e4a70,#191824aa 72%);padding:clamp(12px,1.8vh,18px) clamp(14px,2vw,24px)}
-.achievement-group h2{margin:0;color:#f2effb;font:500 clamp(13px,1.35vw,17px) var(--sans)}
-.achievement-layout{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:clamp(14px,2vw,24px);flex:1;min-height:0;margin-top:10px}
-.achievement-editor{display:flex;min-width:0;flex-direction:column}
-.timeline{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 10px}
-.timeline-stop{position:relative;z-index:1;display:grid;justify-items:center;align-content:center;gap:7px;min-height:52px;border:1px solid #c3bdf733;border-radius:2px;padding:7px 3px;background:#171620;color:#aaa7bb;font:9px var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;touch-action:manipulation;transition:color .2s,border-color .2s,background .2s,transform .2s,box-shadow .2s}
-.timeline-stop::before{content:"";width:10px;height:10px;border:1px solid var(--purple);border-radius:50%;background:#1d1c2a;transition:background .2s,box-shadow .2s}
-.timeline-stop:hover{transform:translateY(-2px);border-color:#b9b2f099;color:#fff}
-.timeline-stop:focus-visible{outline:2px solid var(--lavender);outline-offset:2px;color:#fff}
-.timeline-stop.selected{border-color:var(--lavender);background:#8170c526;color:#fff;box-shadow:inset 0 0 16px #a5a0e811}
-.timeline-stop:hover::before,.timeline-stop:focus-visible::before,.timeline-stop.selected::before{background:var(--lavender);box-shadow:0 0 12px #b9b2f077}
-.achievement-photo{position:relative;min-height:0;height:100%;width:auto;max-width:100%;aspect-ratio:4/3;justify-self:center;display:grid;place-items:center;overflow:hidden;background:#16151f;border:1px dashed #ffffff40}
-.achievement-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.photo-placeholder{text-align:center;color:#aaa7bb;font:10px var(--mono);letter-spacing:.12em;padding:12px}
-.photo-navigation{position:absolute;z-index:1;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}
-.photo-navigation button{width:38px;height:38px;border:1px solid #c3bdf799;border-radius:50%;background:#171620cc;color:var(--lavender);font:20px/1 var(--mono);cursor:pointer;pointer-events:auto;transition:background .2s,transform .2s}
-.photo-navigation button[data-photo-next]{margin-left:auto}
-.photo-navigation button:hover,.photo-navigation button:focus-visible{background:#39334e;color:#fff;outline:2px solid var(--lavender);outline-offset:2px}
-.photo-navigation button:active{transform:scale(.94)}
-.photo-count{position:absolute;z-index:1;right:12px;bottom:12px;padding:5px 8px;background:#171620cc;color:#f2effb;font:9px var(--mono);letter-spacing:.1em}
-.achievement-copy{min-width:0}
-.achievement-copy .achievement-label{display:block;margin:0 0 5px;color:var(--cyan);font:8px var(--mono);letter-spacing:.13em}
-.achievement-name{margin:0 0 12px;color:#f2effb;font:500 clamp(13px,1.3vw,16px)/1.4 var(--sans)}
-.achievement-description{margin:0;color:#b3b0c3;font:11px/1.6 var(--sans);white-space:pre-wrap}
+.achievement-group{display:flex;min-width:0;min-height:0;flex-direction:column;border:1px solid #c3bdf72b;background:linear-gradient(135deg,#332e4a70,#191824aa 72%);padding:clamp(8px,1.2vh,12px) clamp(8px,1vw,14px)}
+.achievement-group h2{flex:none;margin:0;padding-bottom:8px;border-bottom:1px solid #ffffff16;color:#f2effb;font:500 clamp(11px,1.2vw,15px) var(--sans)}
+.achievement-gallery{display:grid;flex:1;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:clamp(5px,.8vw,9px);margin-top:8px}
+.achievement-gallery[data-achievement-gallery="academic"]{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.achievement-gallery[data-achievement-gallery="academic"] .achievement-item{justify-content:center}
+.achievement-gallery[data-achievement-gallery="academic"] .achievement-image-frame{width:100%;height:auto;aspect-ratio:3/4}
+.achievement-gallery[data-achievement-gallery="extracurricular"]{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.achievement-gallery[data-achievement-gallery="extracurricular"] .achievement-image-frame{height:min(18vh,calc(100% - 26px))}
+.achievement-item{display:flex;min-width:0;min-height:0;flex-direction:column;margin:0}
+.achievement-image-frame{position:relative;flex:none;display:grid;place-items:center;align-self:center;width:auto;max-width:100%;height:clamp(24px,7vh,68px);aspect-ratio:3/4;overflow:hidden;border:1px solid #ffffff20;background:#16151f}
+.achievement-image-frame img{width:100%;height:100%;object-fit:contain}
+.achievement-image-error{position:absolute;inset:0;display:grid;place-items:center;padding:12px;color:#aaa7bb;font:9px var(--mono);letter-spacing:.08em;text-align:center}
+.achievement-item figcaption{display:-webkit-box;min-height:0;margin-top:4px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;color:#c5c2d2;font:clamp(7px,.7vw,9px)/1.25 var(--sans);overflow-wrap:anywhere}
 .achievement-hint{margin-left:auto;color:#77748d;font:8px var(--mono)}
 
 /* EDGE PREVIOUS / NEXT (appear on hover) */
-.edge{position:fixed;z-index:2;top:var(--nav-h);bottom:0;width:clamp(110px,16vw,230px);border:0;
+.edge{position:fixed;z-index:4;top:var(--nav-h);bottom:0;width:clamp(110px,16vw,230px);border:0;
   display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(14px,3vw,44px);cursor:pointer;opacity:0;transition:opacity .3s;
   background:linear-gradient(to right,#a5a0e81f,transparent)}
 .edge-left{left:0} .edge-right{right:0;justify-content:flex-end;padding-left:0;padding-right:clamp(14px,3vw,44px);background:linear-gradient(to left,#a5a0e81f,transparent)}
@@ -272,14 +261,17 @@ button{font:inherit}
   .personal-details{padding:24px 22px 20px;gap:14px 16px}
   .personal-details dd{font-size:11px}
   .biography-copy{margin:0 22px 24px}
-  .achievements{position:relative;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;align-content:start;min-height:100%;height:auto;padding:calc(var(--nav-h) + 18px) 6vw 84px}
+  .achievements{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);min-height:0;height:100%;padding:calc(var(--nav-h) + 12px) 4vw 12px;gap:10px}
   .achievements-head{align-items:flex-start}
-  .achievements-head .page-title{font-size:clamp(25px,8vw,38px)}
-  .achievement-group{flex:none;min-height:0;padding:14px}
-  .achievement-layout{grid-template-columns:1fr;grid-template-rows:auto auto;flex:none}
-  .timeline{gap:5px}
-  .timeline-stop{font-size:8px;letter-spacing:.02em}
-  .achievement-photo{width:100%;max-width:none;height:auto;aspect-ratio:4/3}
+  .achievements-head .page-title{font-size:clamp(22px,6vw,32px)}
+  .achievement-group{padding:8px 6px}
+  .achievement-group h2{font-size:clamp(9px,2.8vw,12px)}
+  .achievement-gallery{gap:4px}
+  .achievement-gallery[data-achievement-gallery="extracurricular"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .achievement-gallery[data-achievement-gallery="extracurricular"] .achievement-image-frame{height:min(10vh,calc(100% - 22px))}
+  .achievement-image-frame{height:clamp(22px,6vh,48px)}
+  .achievement-image-error{font-size:7px;padding:3px}
+  .achievement-item figcaption{font-size:7px}
   .achievement-hint{display:none}
   .edge{width:84px;padding-left:10px}.edge-right{padding-right:10px}.edge span{width:36px;height:36px;font-size:18px}
 }
@@ -382,64 +374,20 @@ button{font:inherit}
   <main class="achievements">
     <header class="achievements-head">
       <div>
-        <p class="page-kicker">MILESTONES / TIMELINE 01 &rarr; 02</p>
+        <p class="page-kicker">MILESTONES / ACHIEVEMENTS</p>
         <h1 class="page-title">My <em>achievements.</em></h1>
       </div>
-      <p class="achievement-hint">Select a stop to view its achievements and photos.</p>
+      <p class="achievement-hint">Every achievement and photo, all in one place.</p>
     </header>
 
     <section class="achievement-group" aria-labelledby="academic-title">
       <h2 id="academic-title">Academic Achievements</h2>
-      <div class="achievement-layout">
-        <div class="achievement-editor">
-          <div class="timeline" data-track="academic" role="group" aria-label="Academic achievement timeline">
-            <button class="timeline-stop selected" type="button" data-index="0" aria-pressed="true">Josefa Cariño Elementary School</button>
-            <button class="timeline-stop" type="button" data-index="1" aria-pressed="false">Pines City National High School</button>
-            <button class="timeline-stop" type="button" data-index="2" aria-pressed="false">Saint Louis School Incorporated</button>
-          </div>
-          <div class="achievement-copy">
-            <p class="achievement-label">Achievement details</p>
-            <h3 class="achievement-name" id="academic-name" data-achievement-name></h3>
-            <p class="achievement-description" data-achievement-description></p>
-          </div>
-        </div>
-        <div class="achievement-photo" data-photo-zone>
-          <img alt="" data-photo hidden>
-          <span class="photo-placeholder" data-placeholder>NO PHOTOS ADDED</span>
-          <div class="photo-navigation" data-photo-navigation hidden>
-            <button type="button" data-photo-prev aria-label="Previous photo">&lsaquo;</button>
-            <button type="button" data-photo-next aria-label="Next photo">&rsaquo;</button>
-          </div>
-          <span class="photo-count" data-photo-count hidden></span>
-        </div>
-      </div>
+      <div class="achievement-gallery" data-achievement-gallery="academic" aria-label="All academic achievement photos"></div>
     </section>
 
     <section class="achievement-group" aria-labelledby="extracurricular-title">
       <h2 id="extracurricular-title">Extra Curricular Achievements</h2>
-      <div class="achievement-layout">
-        <div class="achievement-editor">
-          <div class="timeline" data-track="extracurricular" role="group" aria-label="Extra curricular achievement timeline">
-            <button class="timeline-stop selected" type="button" data-index="0" aria-pressed="true">2022</button>
-            <button class="timeline-stop" type="button" data-index="1" aria-pressed="false">2023</button>
-            <button class="timeline-stop" type="button" data-index="2" aria-pressed="false">2026</button>
-          </div>
-          <div class="achievement-copy">
-            <p class="achievement-label">Achievement details</p>
-            <h3 class="achievement-name" id="extracurricular-name" data-achievement-name></h3>
-            <p class="achievement-description" data-achievement-description></p>
-          </div>
-        </div>
-        <div class="achievement-photo" data-photo-zone>
-          <img alt="" data-photo hidden>
-          <span class="photo-placeholder" data-placeholder>NO PHOTOS ADDED</span>
-          <div class="photo-navigation" data-photo-navigation hidden>
-            <button type="button" data-photo-prev aria-label="Previous photo">&lsaquo;</button>
-            <button type="button" data-photo-next aria-label="Next photo">&rsaquo;</button>
-          </div>
-          <span class="photo-count" data-photo-count hidden></span>
-        </div>
-      </div>
+      <div class="achievement-gallery" data-achievement-gallery="extracurricular" aria-label="All extracurricular achievement photos"></div>
     </section>
   </main>
 </section>
@@ -584,86 +532,39 @@ const ACHIEVEMENTS = {
   ]
 };
 
-document.querySelectorAll(".achievement-group").forEach(group => {
-  const timeline = group.querySelector(".timeline");
-  const track = timeline.dataset.track;
-  const detail = group.querySelector(".achievement-layout");
-  const name = detail.querySelector(".achievement-name");
-  const descriptionLabel = detail.querySelector(".achievement-label");
-  const description = detail.querySelector(".achievement-description");
-  const photo = detail.querySelector("[data-photo]");
-  const placeholder = detail.querySelector("[data-placeholder]");
-  const photoNavigation = detail.querySelector("[data-photo-navigation]");
-  const previousPhoto = detail.querySelector("[data-photo-prev]");
-  const photoCount = detail.querySelector("[data-photo-count]");
-  const photoUrls = ACHIEVEMENTS[track];
-  let selectedIndex = 0;
-  let selectedPhotoIndex = 0;
+document.querySelectorAll("[data-achievement-gallery]").forEach(gallery => {
+  const track = gallery.dataset.achievementGallery;
+  const photos = ACHIEVEMENTS[track].flatMap(achievement =>
+    achievement.photos.map(photo => ({
+      title: typeof photo === "string" ? achievement.name : photo.name || achievement.name,
+      src: typeof photo === "string" ? photo : photo.src
+    }))
+  );
 
-  function renderSelectedPhoto() {
-    const achievement = photoUrls[selectedIndex];
-    const photos = achievement.photos;
-    photo.hidden = true;
-    photoNavigation.hidden = photos.length <= 1;
-    photoCount.hidden = photos.length === 0;
-    if (photos.length === 0) {
-      photo.removeAttribute("src");
-      placeholder.hidden = false;
-      placeholder.textContent = "NO PHOTOS ADDED";
-      photoCount.textContent = "";
-      return;
-    }
-    selectedPhotoIndex = (selectedPhotoIndex + photos.length) % photos.length;
-    previousPhoto.hidden = selectedPhotoIndex === 0;
-    const selectedPhoto = photos[selectedPhotoIndex];
-    const photoName = typeof selectedPhoto === "string" ? "" : selectedPhoto.name || "";
-    const photoSrc = typeof selectedPhoto === "string" ? selectedPhoto : selectedPhoto.src;
-    name.textContent = photoName || achievement.name;
-    photoCount.textContent = `${selectedPhotoIndex + 1} / ${photos.length}`;
-    photo.alt = `${photoName || achievement.name}, photo ${selectedPhotoIndex + 1} of ${photos.length}`;
-    placeholder.hidden = true;
-    photo.onload = () => { photo.hidden = false; };
-    photo.onerror = () => {
-      photo.hidden = true;      placeholder.hidden = false;
-      placeholder.textContent = "PHOTO COULD NOT BE LOADED";
-    };
-    photo.src = photoSrc;
-  }
-
-  function renderSelectedAchievement() {
-    const achievement = photoUrls[selectedIndex];
-    name.textContent = achievement.name;
-    const achievementDescription = achievement.description || "";
-    description.textContent = achievementDescription;
-    const hasDescription = Boolean(achievementDescription.trim());
-    descriptionLabel.hidden = !hasDescription;
-    description.hidden = !hasDescription;
-    selectedPhotoIndex = 0;
-    renderSelectedPhoto();
-  }
-
-  timeline.querySelectorAll(".timeline-stop").forEach(button => {
-    button.addEventListener("click", () => {
-      const nextIndex = Number(button.dataset.index);
-      if (!Number.isInteger(nextIndex) || !photoUrls[nextIndex]) return;
-      selectedIndex = nextIndex;
-      timeline.querySelectorAll(".timeline-stop").forEach(stop => {
-        const selected = stop === button;
-        stop.classList.toggle("selected", selected);
-        stop.setAttribute("aria-pressed", String(selected));
-      });
-      renderSelectedAchievement();
-    });
+  photos.forEach(({ title, src }) => {
+    const item = document.createElement("figure");
+    item.className = "achievement-item";
+    const frame = document.createElement("div");
+    frame.className = "achievement-image-frame";
+    const image = document.createElement("img");
+    image.src = src;
+    image.alt = title;
+    image.loading = "lazy";
+    image.decoding = "async";
+    const error = document.createElement("span");
+    error.className = "achievement-image-error";
+    error.textContent = "PHOTO COULD NOT BE LOADED";
+    error.hidden = true;
+    image.addEventListener("error", () => {
+      image.hidden = true;
+      error.hidden = false;
+    }, { once: true });
+    frame.append(image, error);
+    const caption = document.createElement("figcaption");
+    caption.textContent = title;
+    item.append(frame, caption);
+    gallery.append(item);
   });
-  detail.querySelector("[data-photo-prev]").addEventListener("click", () => {
-    selectedPhotoIndex--;
-    renderSelectedPhoto();
-  });
-  detail.querySelector("[data-photo-next]").addEventListener("click", () => {
-    selectedPhotoIndex++;
-    renderSelectedPhoto();
-  });
-  renderSelectedAchievement();
 });
 
 /* INITIAL PAGE FROM URL HASH */
