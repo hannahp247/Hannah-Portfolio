@@ -16,8 +16,8 @@
   --nav-h:60px;
   --stage-h:min(72vh,620px);   /* portrait height */
   --name-offset:0%;            /* nudge the name up/down against the portrait */
-  --lift:.10;                  /* raises the whole group: portrait, glow and orbits */
-  --img-lift:.10;              /* raises ONLY the portrait photo, on top of --lift */
+  --lift:.02;                  /* raises the whole group: portrait, glow and orbits */
+  --img-lift:.02;              /* raises ONLY the portrait photo, on top of --lift */
   --mouse-x:0; --mouse-y:0; --cursor-x:0; --cursor-y:0;
 }
 *{box-sizing:border-box}
@@ -102,28 +102,24 @@ button{font:inherit}
   display:flex;align-items:center;justify-content:center;
   transform:translate3d(calc(var(--mouse-x) * 8px),calc(var(--mouse-y) * 4px),0);
   transition:transform .18s ease-out}
-.portrait-glow{position:absolute;width:95%;height:80%;border-radius:50%;background:#6354b71c;filter:blur(48px)}
+.portrait-glow{position:absolute;width:min(100%,470px,49vh);aspect-ratio:.70;border-radius:32px;
+  background:#9d8df544;filter:blur(42px)}
 .orbit{position:absolute;width:100%;height:50%;border:1px solid #b9b2f018;border-radius:50%;
   transform:rotate(-28deg);pointer-events:none}
 .orbit-two{width:120%;height:50%;transform:rotate(35deg)}
 .marker{position:absolute;z-index:5;color:var(--lavender);font:14px var(--mono);opacity:.7}
 .marker-one{top:15%;left:12%} .marker-two{top:54%;right:3%}
 
-.portrait-frame{position:relative;isolation:isolate;overflow:hidden;translate:0 calc(var(--stage-h) * var(--img-lift) * -1);width:100%;height:100%;max-width:470px;
+.portrait-frame{position:relative;isolation:isolate;overflow:hidden;translate:0 calc(var(--stage-h) * var(--img-lift) * -1);
+  width:min(100%,470px,49vh);height:auto;aspect-ratio:.70;max-width:470px;border:1px solid #c3bdf7;border-radius:32px;
+  background:linear-gradient(145deg,#29263d,#171622 75%);
+  box-shadow:0 0 0 1px #fff5,0 0 18px 4px #c3bdf777,0 0 38px 9px #8f87e855;
   display:flex;align-items:center;justify-content:center;animation:portraitAppear 1.2s ease both}
-.portrait-layer{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;
-  object-position:center bottom;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 8%,#000 20%),linear-gradient(to right,transparent 0%,#0003 6%,#000 20%,#000 80%,#0003 94%,transparent 100%);
-  -webkit-mask-composite:source-in;
-  mask-image:linear-gradient(to bottom,transparent 0%,transparent 8%,#000 20%),linear-gradient(to right,transparent 0%,#0003 6%,#000 20%,#000 80%,#0003 94%,transparent 100%);
-  mask-composite:intersect}
-.portrait-base{z-index:1;opacity:.48;clip-path:inset(0 0 100% 0);
-  filter:grayscale(100%) contrast(1.08) brightness(.9);animation:revealPortrait 2.4s ease-out forwards}
-.portrait-color{z-index:2;clip-path:inset(0);opacity:0;filter:contrast(1.02) saturate(.88);
-  animation:colorFadeIn .9s ease-in-out 2.4s forwards}
-.portrait-frame::after{content:"";position:absolute;z-index:4;left:6%;right:6%;top:-3%;height:2px;
-  background:linear-gradient(90deg,transparent,#c3bdf7aa 22%,#fff 50%,#c3bdf7aa 78%,transparent);
-  box-shadow:0 3px 4px #fff,0 7px 12px #c3bdf7,0 14px 22px #a5a0e866;pointer-events:none;animation:portraitScan 2.4s ease-in-out forwards}
+.portrait-photo{position:absolute;z-index:1;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+.portrait-frame::before{content:"";position:absolute;z-index:2;inset:0;
+  background:linear-gradient(145deg,#c3bdf714,transparent 42%,#17162220);pointer-events:none}
+.portrait-frame::after{content:"";position:absolute;z-index:3;inset:0;border:1px solid #f4f0ff88;border-radius:inherit;
+  box-shadow:inset 0 0 18px #b9b2f022;pointer-events:none}
 
 /* NAME SIDE: starts at the top of the portrait so the name sits at head level */
 .name-side{position:relative;z-index:7;min-width:0;height:var(--stage-h);
@@ -212,7 +208,26 @@ button{font:inherit}
 .achievement-image-frame img{width:100%;height:100%;object-fit:contain}
 .achievement-image-error{position:absolute;inset:0;display:grid;place-items:center;padding:12px;color:#aaa7bb;font:9px var(--mono);letter-spacing:.08em;text-align:center}
 .achievement-item figcaption{display:-webkit-box;min-height:0;margin-top:4px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;color:#c5c2d2;font:clamp(7px,.7vw,9px)/1.25 var(--sans);overflow-wrap:anywhere}
+.achievement-gallery[data-achievement-gallery="academic"] .achievement-item figcaption{display:block;text-align:center}
+.achievement-school,.achievement-description{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.achievement-school{margin-bottom:2px;color:#f2effb;font-weight:600;line-height:1.2}
+.achievement-description{color:#c5c2d2}
 .achievement-hint{margin-left:auto;color:#77748d;font:8px var(--mono)}
+
+/* FAMILY AND FRIENDS */
+.family-layout{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(16px,2.5vh,26px);
+  padding:calc(var(--nav-h) + clamp(24px,5vh,48px)) 7vw 32px}
+.family-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.family-index{margin:0;color:var(--lavender);font:10px var(--mono);letter-spacing:.14em}
+.family-index span{color:#77748d}
+.family-gallery{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.7vw,22px)}
+.family-card{display:flex;min-width:0;min-height:0;flex-direction:column;gap:12px;margin:0;padding:clamp(10px,1.2vw,16px);
+  border:1px solid #c3bdf733;border-radius:18px;background:linear-gradient(145deg,#332e4a88,#191824d9 78%);
+  box-shadow:inset 0 1px #ffffff12,0 12px 30px #09081230;backdrop-filter:blur(8px)}
+.family-photo-frame{flex:1;min-height:0;display:grid;place-items:center;overflow:hidden;
+  border:1px solid #ffffff20;border-radius:12px;background:#171622}
+.family-photo-frame img{display:block;width:100%;height:100%;object-fit:contain}
+.family-card figcaption{flex:none;color:#f2effb;font:500 clamp(10px,1vw,13px)/1.4 var(--sans);text-align:center}
 
 /* EDGE PREVIOUS / NEXT (appear on hover) */
 .edge{position:fixed;z-index:4;top:var(--nav-h);bottom:0;width:clamp(110px,16vw,230px);border:0;
@@ -228,12 +243,9 @@ button{font:inherit}
 
 /* ANIMATIONS */
 @keyframes portraitAppear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes revealPortrait{to{clip-path:inset(0)}}
-@keyframes colorFadeIn{from{opacity:0}to{opacity:1}}
 @keyframes networkDrift{from{background-position:0 0,0 0,0 0}to{background-position:92px 84px,24px -18px,-18px 22px}}
 @keyframes ledBlink{0%,100%{opacity:.28}42%{opacity:.62}48%{opacity:.2}54%{opacity:.55}}
 @keyframes cursorBlink{0%,48%{opacity:1}49%,100%{opacity:0}}
-@keyframes portraitScan{0%{top:0;opacity:1}100%{top:100%;opacity:0}}
 
 /* RESPONSIVE */
 @media (max-width:800px){
@@ -242,7 +254,8 @@ button{font:inherit}
 }
 @media (max-width:640px){
   :root{--nav-h:52px;--stage-h:38vh;--name-offset:0;--lift:0;--img-lift:0}
-  .navigation{gap:clamp(12px,4vw,24px);padding:0 12px}
+  .portrait-frame,.portrait-glow{width:min(100%,26vh)}
+  .navigation{gap:clamp(6px,2vw,14px);padding:0 12px}
   .nav-button{font-size:clamp(8px,2.4vw,10px);letter-spacing:.06em}
   .nav-button[data-page="about"]{font-size:clamp(9px,2.7vw,11px)}
   .screen.active#home{overflow-y:auto}
@@ -273,6 +286,11 @@ button{font:inherit}
   .achievement-image-error{font-size:7px;padding:3px}
   .achievement-item figcaption{font-size:7px}
   .achievement-hint{display:none}
+  .family-layout{gap:16px;padding:calc(var(--nav-h) + 18px) 5vw 24px}
+  .family-gallery{grid-template-columns:repeat(4,minmax(190px,1fr));gap:10px;overflow-x:auto;overflow-y:hidden;padding-bottom:6px;scroll-snap-type:x mandatory}
+  .family-card{scroll-snap-align:start}
+  .family-photo-frame{border-radius:10px}
+  .family-card figcaption{font-size:11px}
   .edge{width:84px;padding-left:10px}.edge-right{padding-right:10px}.edge span{width:36px;height:36px;font-size:18px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.cursor-glow{display:none}}
@@ -287,6 +305,7 @@ button{font:inherit}
   <button class="nav-button current" data-page="home">HOME</button>
   <button class="nav-button" data-page="about">PERSONAL INFORMATION</button>
   <button class="nav-button" data-page="education">ACHIEVEMENTS</button>
+  <button class="nav-button" data-page="family">FAMILY &amp; FRIENDS</button>
 </nav>
 
 <!-- HOME -->
@@ -299,8 +318,7 @@ button{font:inherit}
       <span class="marker marker-one">+</span>
       <span class="marker marker-two">+</span>
       <div class="portrait-frame">
-        <img class="portrait-layer portrait-base" referrerpolicy="no-referrer" alt="" src="meme.png">
-        <img class="portrait-layer portrait-color" referrerpolicy="no-referrer" alt="Portrait of Hannah Mae B. Pacio" src="meme.png">
+        <img class="portrait-photo" alt="Full-body portrait of Hannah Mae B. Pacio" src="hannah-profile.png">
       </div>
     </div>
 
@@ -333,7 +351,7 @@ button{font:inherit}
         <p class="page-kicker">PERSONAL INFORMATION / PROFILE 02</p>
         <h1 class="page-title">Personal <em>information.</em></h1>
       </div>
-      <p class="about-index">02 <span>/ 03</span></p>
+      <p class="about-index">02 <span>/ 04</span></p>
     </header>
 
     <div class="about-grid">
@@ -392,12 +410,43 @@ button{font:inherit}
   </main>
 </section>
 
+<!-- FAMILY AND FRIENDS -->
+<section class="screen" id="family">
+  <main class="family-layout">
+    <header class="family-head">
+      <div>
+        <p class="page-kicker">THE PEOPLE I TREASURE: MY REASON AND MOTIVATION </p>
+        <h1 class="page-title">Family <em>&amp; friends.</em></h1>
+      </div>
+      <p class="family-index">04 <span>/ 04</span></p>
+    </header>
+    <div class="family-gallery" aria-label="Family and friends photos">
+      <figure class="family-card">
+        <div class="family-photo-frame"><img src="family-mama.png" alt="Hannah with her mama" loading="lazy" decoding="async"></div>
+        <figcaption>My Mama and Me</figcaption>
+      </figure>
+      <figure class="family-card">
+        <div class="family-photo-frame"><img src="family-daddy.png" alt="Hannah with her daddy" loading="lazy" decoding="async"></div>
+        <figcaption>My Daddy and Me</figcaption>
+      </figure>
+      <figure class="family-card">
+        <div class="family-photo-frame"><img src="family-siblings.jpg" alt="Hannah with her siblings" loading="lazy" decoding="async"></div>
+        <figcaption>My Siblings and me</figcaption>
+      </figure>
+      <figure class="family-card">
+        <div class="family-photo-frame"><img src="family-friends.jpg" alt="Hannah with her best friends" loading="lazy" decoding="async"></div>
+        <figcaption>My Best Friends and Me</figcaption>
+      </figure>
+    </div>
+  </main>
+</section>
+
 <!-- EDGE BUTTONS: hover the left or right side of the screen -->
 <button class="edge edge-left" id="prev" aria-label="Previous page" hidden><span>&#8249;</span></button>
 <button class="edge edge-right" id="next" aria-label="Next page" hidden><span>&#8250;</span></button>
 
 <script>
-const ids = ["home", "about", "education"];
+const ids = ["home", "about", "education", "family"];
 const pages = ids.map(id => document.getElementById(id));
 const navButtons = [...document.querySelectorAll(".nav-button")];
 const prevBtn = document.getElementById("prev");
@@ -503,9 +552,9 @@ const loader = document.getElementById("loader");
 /* Use { name: "Picture title", src: "photo.jpg" } for a custom title per photo. */
 const ACHIEVEMENTS = {
   academic: [
-    { name: "Elementary Certificate of Completion (Elementary Graduation) with Conduct Award.", photos: ["elem final.png"] },
-    { name: "Junior High School Certificate of Completion (Moving Up) with Consistent Academic Excellence from 8th to 10th grade.", photos: ["jr high final.png"] },
-    { name: " Senior High School Diploma (Graduation) with consistent Honors and Louisian Achiever Award.", photos: ["sr high final.png"] }
+    { school: "Josefa Cariño Elementary School", name: "Elementary Certificate of Completion (Elementary Graduation) with Conduct Award.", photos: ["elem final.png"] },
+    { school: "Pines City National High School", name: "Junior High School Certificate of Completion (Moving Up) with Consistent Academic Excellence from 8th to 10th grade.", photos: ["jr high final.png"] },
+    { school: "Saint Louis School Incorporated", name: " Senior High School Diploma (Graduation) with consistent Honors and Louisian Achiever Award.", photos: ["sr high final.png"] }
   ],
   extracurricular: [
     {
@@ -537,11 +586,12 @@ document.querySelectorAll("[data-achievement-gallery]").forEach(gallery => {
   const photos = ACHIEVEMENTS[track].flatMap(achievement =>
     achievement.photos.map(photo => ({
       title: typeof photo === "string" ? achievement.name : photo.name || achievement.name,
+      school: achievement.school || "",
       src: typeof photo === "string" ? photo : photo.src
     }))
   );
 
-  photos.forEach(({ title, src }) => {
+  photos.forEach(({ title, school, src }) => {
     const item = document.createElement("figure");
     item.className = "achievement-item";
     const frame = document.createElement("div");
@@ -561,7 +611,17 @@ document.querySelectorAll("[data-achievement-gallery]").forEach(gallery => {
     }, { once: true });
     frame.append(image, error);
     const caption = document.createElement("figcaption");
-    caption.textContent = title;
+    if (school) {
+      const schoolName = document.createElement("strong");
+      schoolName.className = "achievement-school";
+      schoolName.textContent = school;
+      const description = document.createElement("span");
+      description.className = "achievement-description";
+      description.textContent = title;
+      caption.append(schoolName, description);
+    } else {
+      caption.textContent = title;
+    }
     item.append(frame, caption);
     gallery.append(item);
   });
