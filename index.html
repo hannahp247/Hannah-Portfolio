@@ -516,7 +516,7 @@ button{font:inherit}
 </section>
 
 <!-- EDGE BUTTONS: hover the left or right side of the screen -->
-<button class="edge edge-left" id="prev" aria-label="Previous page" hidden><span>&#8249;</span></button>
+<button class="edge edge-left" id="prev" aria-label="Previous page" title="Previous page" hidden><span aria-hidden="true">&#8249;</span></button>
 <button class="edge edge-right" id="next" aria-label="Next page" title="Next page" hidden><span aria-hidden="true">&#8250;</span></button>
 
 <script>
@@ -540,7 +540,11 @@ function showPage(id) {
   });
   prevBtn.hidden = i === 0;
   nextBtn.hidden = i === 0;
+  const isAboutPage = i === 1;
   const isFamilyPage = i === ids.length - 1;
+  prevBtn.setAttribute("aria-label", isAboutPage ? "Return to homepage" : "Previous page");
+  prevBtn.title = isAboutPage ? "Return to homepage" : "Previous page";
+  prevBtn.querySelector("span").textContent = isAboutPage ? "⌂" : "‹";
   nextBtn.setAttribute("aria-label", isFamilyPage ? "Return to homepage" : "Next page");
   nextBtn.title = isFamilyPage ? "Return to homepage" : "Next page";
   nextBtn.querySelector("span").textContent = isFamilyPage ? "⌂" : "›";
