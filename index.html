@@ -153,40 +153,33 @@ button{font:inherit}
 .explore-link.ready{opacity:1;transform:translateY(0);pointer-events:auto}
 .explore-link:hover,.explore-link:focus-visible{background:var(--lavender);color:#171321;box-shadow:0 0 16px #a5a0e866;outline:none}
 
-/* PERSONAL INFORMATION, biography, and interests in glass-like panels */
+/* PERSONAL INFORMATION */
+.screen#about{overflow:hidden}
 .about-layout{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(18px,3vh,30px);
   padding:calc(var(--nav-h) + clamp(18px,4vh,40px)) 7vw clamp(22px,4vh,40px)}
 .about-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
 .about-index{margin:0;color:var(--lavender);font:10px var(--mono);letter-spacing:.14em}
 .about-index span{color:#77748d}
-.about-grid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(18px,3vw,42px)}
-.about-panel{position:relative;min-height:0;overflow:hidden;border:1px solid #c3bdf72b;
-  background:linear-gradient(135deg,#332e4a8c,#191824b8 72%);box-shadow:inset 0 1px #ffffff12;
-  backdrop-filter:blur(8px)}
-.about-panel::after{content:"";position:absolute;inset:14px;pointer-events:none;border:1px solid #ffffff08}
-.panel-label{position:relative;z-index:1;display:flex;gap:14px;padding:18px 22px;
-  border-bottom:1px solid #ffffff16;color:var(--lavender);font:9px var(--mono);letter-spacing:.16em}
-.panel-label span{color:var(--cyan)}
-.panel-copy{position:relative;z-index:1;padding:clamp(22px,3vw,42px) clamp(22px,3.2vw,46px) 20px}
-.panel-copy p{margin:0 0 20px;color:#c5c2d2;font-size:clamp(11px,1.05vw,14px);line-height:1.9}
-.panel-copy p:last-child{margin-bottom:0}
-.personal-details{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;
-  margin:0;padding:clamp(20px,2.4vw,32px) clamp(22px,3.2vw,46px) 18px}
-.personal-details div{min-width:0}
-.personal-details .education-detail{grid-column:1/-1}
-.personal-details dt{margin:0 0 5px;color:var(--cyan);font:9px var(--mono);letter-spacing:.12em;text-transform:uppercase}
-.personal-details dd{margin:0;color:#ddd9ee;font-size:clamp(10px,.95vw,12px);line-height:1.55;overflow-wrap:anywhere}
-.personal-details a{color:inherit;text-decoration-color:#b9b2f066;text-underline-offset:3px}
-.personal-details a:hover,.personal-details a:focus-visible{color:var(--lavender)}
-.biography-copy{margin:0 clamp(22px,3.2vw,46px);padding:16px 0 0;border-top:1px solid #ffffff16}
-.biography-copy .mini-label{margin:0 0 8px;color:var(--cyan);font:9px var(--mono);letter-spacing:.16em}
-.biography-copy p:last-child{margin:0;color:#ddd9ee;font-size:11px;line-height:1.7}
-.interest-list{position:relative;z-index:1;display:flex;flex-direction:column;gap:0;margin:0;padding:4px 22px 18px;list-style:none}
-.interest-list li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:15px 0;border-bottom:1px solid #ffffff12}
-.interest-list li:last-child{border-bottom:0}
-.interest-number{color:var(--purple);font:10px var(--mono);padding-top:3px}
-.interest-list h2{margin:0 0 5px;color:#f2effb;font:500 clamp(12px,1.2vw,15px) var(--sans)}
-.interest-list p{margin:0;color:#aaa7bb;font-size:11px;line-height:1.55}
+.personal-rows{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(10px,1.5vw,18px)}
+.personal-row{min-width:0;min-height:0;overflow:auto;padding:clamp(14px,1.5vw,20px);
+  border:1px solid #c3bdf72b;background:linear-gradient(135deg,#332e4a70,#191824aa 72%);
+  box-shadow:inset 0 1px #ffffff12;backdrop-filter:blur(8px);scrollbar-width:thin}
+.personal-row.identity-info-card,.personal-row.background-info-card{overflow:hidden;overflow:clip}
+.identity-info-card .personal-row-content{gap:6px}
+.personal-row-heading{display:flex;flex-direction:column;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #ffffff16}
+.personal-row-heading span{color:var(--cyan);font:10px var(--mono)}
+.personal-row-heading h2{margin:0;color:#f2effb;font:500 clamp(12px,1.1vw,15px) var(--sans);letter-spacing:.02em}
+.personal-row-content{display:flex;flex-direction:column;gap:10px;margin:0;padding:0}
+.personal-row-content div{display:grid;grid-template-columns:minmax(84px,.72fr) minmax(0,1.28fr);align-items:start;gap:8px}
+.personal-row-content dt{color:#aaa7bb;font:10px/1.5 var(--mono)}
+.personal-row-content dd{min-width:0;margin:0;color:#ddd9ee;font-size:clamp(10px,.9vw,12px);line-height:1.5;overflow-wrap:anywhere}
+.personal-row-content a{color:inherit;text-decoration-color:#b9b2f066;text-underline-offset:3px}
+.personal-row-content a:hover,.personal-row-content a:focus-visible{color:var(--lavender)}
+.personal-row-content ul{display:flex;flex-direction:column;gap:5px;margin:0;padding-left:16px}
+.personal-row-content li{padding-left:2px}
+.background-content{gap:5px}
+.background-content ul{gap:2px}
+.privacy-note{color:#aaa7bb;font-size:11px;line-height:1.65}
 
 /* ACHIEVEMENTS */
 .achievements{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);align-items:stretch;gap:clamp(10px,1.5vh,16px);
@@ -254,6 +247,8 @@ button{font:inherit}
 @media (max-width:800px){
   .home-layout{padding:var(--nav-h) 5vw 0;gap:3vw}
   .name{font-size:clamp(22px,4vw,39px);letter-spacing:.04em}
+  .about-layout{position:relative;min-height:100%;height:auto;overflow-y:auto;padding:calc(var(--nav-h) + 18px) 6vw 84px}
+  .personal-rows{flex:none;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto}
 }
 @media (max-width:640px){
   :root{--nav-h:52px;--stage-h:38vh;--name-offset:0;--lift:0;--img-lift:0}
@@ -270,13 +265,9 @@ button{font:inherit}
   .about-layout{position:relative;min-height:100%;height:auto;overflow-y:auto;padding:calc(var(--nav-h) + 18px) 6vw 84px}
   .about-head{align-items:flex-start}
   .about-head .page-title{font-size:clamp(25px,8vw,38px)}
-  .about-grid{display:flex;flex-direction:column;min-height:0}
-  .about-panel{overflow:visible}
-  .personal-panel{min-height:0}
-  .interests-panel{min-height:540px}
-  .personal-details{padding:24px 22px 20px;gap:14px 16px}
-  .personal-details dd{font-size:11px}
-  .biography-copy{margin:0 22px 24px}
+  .personal-rows{flex:none;grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:auto}
+  .personal-row{overflow:visible}
+  .personal-row-content div{grid-template-columns:minmax(90px,.7fr) minmax(0,1.3fr)}
   .achievements{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);min-height:0;height:100%;padding:calc(var(--nav-h) + 12px) 4vw 12px;gap:10px}
   .achievements-head{align-items:flex-start}
   .achievements-head .page-title{font-size:clamp(22px,6vw,32px)}
@@ -308,7 +299,6 @@ button{font:inherit}
 
 <!-- TOP NAVIGATION -->
 <nav class="navigation" aria-label="Portfolio navigation">
-  <button class="nav-button current" data-page="home">HOME</button>
   <button class="nav-button" data-page="about">PERSONAL INFORMATION</button>
   <button class="nav-button" data-page="education">ACHIEVEMENTS</button>
   <button class="nav-button" data-page="family">FAMILY &amp; FRIENDS</button>
@@ -324,7 +314,7 @@ button{font:inherit}
       <span class="marker marker-one">+</span>
       <span class="marker marker-two">+</span>
       <div class="portrait-frame">
-        <img class="portrait-photo" alt="Full-body portrait of Hannah Mae B. Pacio" src="hannah-profile.png">
+        <img class="portrait-photo" alt="Full-body portrait of Hannah Mae B. Pacio" src="hannah-profile-update.jpg">
       </div>
     </div>
 
@@ -360,34 +350,104 @@ button{font:inherit}
       <p class="about-index">02 <span>/ 04</span></p>
     </header>
 
-    <div class="about-grid">
-      <article class="about-panel personal-panel">
-        <div class="panel-label"><span>01</span> PERSONAL INFORMATION</div>
-        <dl class="personal-details">
-          <div><dt>Name</dt><dd>Hannah Mae B. Pacio</dd></div>
-          <div><dt>Birthday</dt><dd>May 8, 2008</dd></div>
-          <div><dt>Age</dt><dd>18</dd></div>
-          <div><dt>Location</dt><dd>Baguio City, Philippines</dd></div>
-          <div class="education-detail"><dt>Education</dt><dd>University of the Cordilleras, Bachelor of Science in Computer Science</dd></div>
-          <div><dt>Languages</dt><dd>English, Filipino</dd></div>
-          <div><dt>Email</dt><dd><a href="mailto:hannahpacio7@gmail.com">hannahpacio7@gmail.com</a></dd></div>
-          <div><dt>Facebook</dt><dd>Hannah Pacio</dd></div>
-        </dl>
-        <div class="biography-copy">
-          <p class="mini-label">BIOGRAPHY</p>
-          <p>A Computer Science student with growing interests in cybersecurity, software, hardware, and automation. I aspire to become a cybersecurity professional and tech entrepreneur, building secure, practical solutions for real-world needs.</p>
+    <div class="personal-rows">
+      <article class="personal-row identity-info-card">
+        <div class="personal-row-heading">
+          <span>01</span>
+          <h2>PERSONAL IDENTITY</h2>
         </div>
+
+        <dl class="personal-row-content">
+          <div><dt>Full name</dt><dd>Hannah Mae B. Pacio</dd></div>
+          <div><dt>Gender</dt><dd>Female</dd></div>
+          <div><dt>Age</dt><dd>18</dd></div>
+          <div><dt>Birthday</dt><dd>May 8, 2008</dd></div>
+          <div><dt>Place of birth</dt><dd>Baguio City</dd></div>
+          <div><dt>Nationality</dt><dd>Filipino</dd></div>
+          <div><dt>Race</dt><dd>Asian</dd></div>
+          <div><dt>Blood Type</dt><dd>O</dd></div>
+          <div><dt>Civil status</dt><dd>Single</dd></div>
+        </dl>
       </article>
 
-      <article class="about-panel interests-panel">
-        <div class="panel-label"><span>02</span> HOBBIES &amp; INTERESTS</div>
-        <ul class="interest-list">
-          <li><span class="interest-number">01</span><div><h2>Sports &amp; Fitness</h2><p>Volleyball, footvolley, and functional fitness.</p></div></li>
-          <li><span class="interest-number">02</span><div><h2>Creative Arts</h2><p>Sketching, drawing, and acoustic guitar.</p></div></li>
-          <li><span class="interest-number">03</span><div><h2>Technology &amp; Innovation</h2><p>Computer Science, cybersecurity, software development, hardware, automation, and entrepreneurship.</p></div></li>
-          <li><span class="interest-number">04</span><div><h2>Intellectual Development</h2><p>Psychology, human behavior, communication, logical reasoning, and problem-solving.</p></div></li>
-          <li><span class="interest-number">05</span><div><h2>Personal Growth &amp; Values</h2><p>Biblical study, Christian formation, character development, discipline, wisdom, and personal responsibility.</p></div></li>
-        </ul>
+      <article class="personal-row">
+        <div class="personal-row-heading">
+          <span>02</span>
+          <h2>PHYSICAL INFORMATION</h2>
+        </div>
+
+        <dl class="personal-row-content">
+          <div><dt>Eye color</dt><dd>Brown</dd></div>
+          <div><dt>Hair color</dt><dd>Black</dd></div>
+          <div><dt>Dominant hand</dt><dd>Right</dd></div>
+          <div><dt>Height</dt><dd>154.6 cm</dd></div>
+          <div><dt>Weight</dt><dd>53 kg</dd></div>
+          <div><dt>BMI</dt><dd>22.2</dd></div>
+          <div><dt>Distinguishing marks</dt><dd>3 moles on lower cheek</dd></div>
+
+        </dl>
+        <p class="privacy-note">Detailed measurements and identifying physical details are kept private.</p>
+      </article>
+
+      <article class="personal-row">
+        <div class="personal-row-heading">
+          <span>03</span>
+          <h2>CONTACT INFORMATION</h2>
+        </div>
+
+        <dl class="personal-row-content">
+          <div><dt>General location</dt><dd>Baguio City, Philippines</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:hannahpacio01@gmail.com">hannahpacio01@gmail.com</a></dd></div>
+          <div><dt>Facebook</dt><dd>Hannah Mae Pacio</dd></div>
+        </dl>
+      </article>
+
+      <article class="personal-row background-info-card">
+        <div class="personal-row-heading">
+          <span>04</span>
+          <h2>BACKGROUND INFORMATION</h2>
+        </div>
+
+        <dl class="personal-row-content background-content">
+          <div><dt>Education</dt><dd>University of the Cordilleras, Bachelor of Science in Computer Science</dd></div>
+          <div><dt>Skills</dt><dd>Leadership, communication, critical thinking, practical and cognitive problem-solving</dd></div>
+          <div><dt>Languages</dt><dd>Tagalog, English</dd></div>
+          <div>
+            <dt>Hobbies &amp; interests</dt>
+            <dd>
+              <ul>
+                <li>Volleyball, footvolley, and fitness</li>
+                <li>Sketching, drawing, and acoustic guitar</li>
+                <li>Technology, cybersecurity, and entrepreneurship</li>
+                <li>Psychology, communication, and logical reasoning</li>
+                <li>Biblical study and personal growth</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="personal-row">
+        <div class="personal-row-heading">
+          <span>05</span>
+          <h2>PERSONALITY</h2>
+        </div>
+
+        <dl class="personal-row-content">
+          <div><dt>Personality type</dt><dd>INTJ</dd></div>
+        </dl>
+      </article>
+
+      <article class="personal-row">
+        <div class="personal-row-heading">
+          <span>06</span>
+          <h2>HEALTH INFORMATION</h2>
+        </div>
+
+      <dl class="personal-row-content">
+          <div><dt>Alergy</dt><dd>Seafood</dd></div>
+        </dl>
+        <p class="privacy-note">Health and medical details are kept private and are not displayed on this public profile.</p>
       </article>
     </div>
   </main>
@@ -449,7 +509,7 @@ button{font:inherit}
 
 <!-- EDGE BUTTONS: hover the left or right side of the screen -->
 <button class="edge edge-left" id="prev" aria-label="Previous page" hidden><span>&#8249;</span></button>
-<button class="edge edge-right" id="next" aria-label="Next page" hidden><span>&#8250;</span></button>
+<button class="edge edge-right" id="next" aria-label="Next page" title="Next page" hidden><span aria-hidden="true">&#8250;</span></button>
 
 <script>
 const ids = ["home", "about", "education", "family"];
@@ -471,7 +531,11 @@ function showPage(id) {
     on ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current");
   });
   prevBtn.hidden = i === 0;
-  nextBtn.hidden = i === 0 || i === ids.length - 1;
+  nextBtn.hidden = i === 0;
+  const isFamilyPage = i === ids.length - 1;
+  nextBtn.setAttribute("aria-label", isFamilyPage ? "Return to homepage" : "Next page");
+  nextBtn.title = isFamilyPage ? "Return to homepage" : "Next page";
+  nextBtn.querySelector("span").textContent = isFamilyPage ? "⌂" : "›";
   history.replaceState(null, "", "#" + id);
 }
 
@@ -481,10 +545,16 @@ exploreLink.addEventListener("click", e => {
   showPage("about");
 });
 prevBtn.addEventListener("click", () => showPage(ids[currentIndex - 1]));
-nextBtn.addEventListener("click", () => showPage(ids[currentIndex + 1]));
+nextBtn.addEventListener("click", () => {
+  if (currentIndex === ids.length - 1) showPage("home");
+  else showPage(ids[currentIndex + 1]);
+});
 document.addEventListener("keydown", e => {
   if (e.target.isContentEditable) return;
-  if (e.key === "ArrowRight" && currentIndex < ids.length - 1) showPage(ids[currentIndex + 1]);
+  if (e.key === "ArrowRight") {
+    if (currentIndex === ids.length - 1) showPage("home");
+    else if (currentIndex < ids.length - 1) showPage(ids[currentIndex + 1]);
+  }
   if (e.key === "ArrowLeft" && currentIndex > 0) showPage(ids[currentIndex - 1]);
   if (e.key === "Escape") showPage("home");
 });

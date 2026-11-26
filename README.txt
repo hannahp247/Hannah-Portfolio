@@ -8,13 +8,14 @@ PREVIEW
 
 HOMEPAGE
 - Portrait left; name decoding right.
-- Uses the two Wix-hosted portrait image URLs supplied by the user.
+- The homepage uses hannah-profile-update.jpg.
 - Charcoal/purple/lavender/cyan theme.
 - No “Computer Science Student” header text and no extra homepage copy.
 - Loading bar runs with the name reveal.
 
 PERSONAL INFORMATION
-- Includes contact details, a short biography, and hobbies/interests.
+- Uses six numbered cards for identity, physical details, contact, background and interests, personality, and health; no portrait is shown on this screen.
+- Private identifiers, exact birth date, detailed physical and medical information, and home and emergency-contact details are intentionally not displayed on the public portfolio.
 
 ACHIEVEMENTS
 - Two horizontal timelines: Academic Achievements and Extra Curricular Achievements.
