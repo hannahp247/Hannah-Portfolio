@@ -154,19 +154,18 @@ button{font:inherit}
 .explore-link:hover,.explore-link:focus-visible{background:var(--lavender);color:#171321;box-shadow:0 0 16px #a5a0e866;outline:none}
 
 /* PERSONAL INFORMATION */
-.screen#about{overflow:hidden}
-.about-layout{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(18px,3vh,30px);
-  padding:calc(var(--nav-h) + clamp(18px,4vh,40px)) 7vw clamp(22px,4vh,40px)}
+.screen#about{overflow:clip}
+.about-layout{position:absolute;inset:0;display:flex;flex-direction:column;gap:clamp(12px,2vh,20px);
+  padding:calc(var(--nav-h) + clamp(12px,2.5vh,24px)) 7vw clamp(16px,2.5vh,24px)}
 .about-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
 .about-index{margin:0;color:var(--lavender);font:10px var(--mono);letter-spacing:.14em}
 .about-index span{color:#77748d}
 .personal-rows{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(10px,1.5vw,18px)}
-.personal-row{min-width:0;min-height:0;overflow:auto;padding:clamp(14px,1.5vw,20px);
+.personal-row{min-width:0;min-height:0;overflow:clip;padding:clamp(12px,1.2vw,16px);
   border:1px solid #c3bdf72b;background:linear-gradient(135deg,#332e4a70,#191824aa 72%);
-  box-shadow:inset 0 1px #ffffff12;backdrop-filter:blur(8px);scrollbar-width:thin}
-.personal-row.identity-info-card,.personal-row.background-info-card{overflow:hidden;overflow:clip}
+  box-shadow:inset 0 1px #ffffff12;backdrop-filter:blur(8px)}
 .identity-info-card .personal-row-content{gap:6px}
-.personal-row-heading{display:flex;flex-direction:column;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #ffffff16}
+.personal-row-heading{display:flex;align-items:center;gap:10px;margin-bottom:9px;padding-bottom:8px;border-bottom:1px solid #ffffff16}
 .personal-row-heading span{color:var(--cyan);font:10px var(--mono)}
 .personal-row-heading h2{margin:0;color:#f2effb;font:500 clamp(12px,1.1vw,15px) var(--sans);letter-spacing:.02em}
 .personal-row-content{display:flex;flex-direction:column;gap:10px;margin:0;padding:0}
@@ -247,8 +246,8 @@ button{font:inherit}
 @media (max-width:800px){
   .home-layout{padding:var(--nav-h) 5vw 0;gap:3vw}
   .name{font-size:clamp(22px,4vw,39px);letter-spacing:.04em}
-  .about-layout{position:relative;min-height:100%;height:auto;overflow-y:auto;padding:calc(var(--nav-h) + 18px) 6vw 84px}
-  .personal-rows{flex:none;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto}
+  .about-layout{position:absolute;min-height:0;height:100%;overflow:clip;padding:calc(var(--nav-h) + 10px) 6vw 12px}
+  .personal-rows{flex:1;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:640px){
   :root{--nav-h:52px;--stage-h:38vh;--name-offset:0;--lift:0;--img-lift:0}
@@ -262,11 +261,20 @@ button{font:inherit}
   .name{font-size:clamp(20px,6.4vw,30px);letter-spacing:.03em}
   .tagline{font-size:9px;margin-top:8px;letter-spacing:.08em}
   .orbit{width:140%}
-  .about-layout{position:relative;min-height:100%;height:auto;overflow-y:auto;padding:calc(var(--nav-h) + 18px) 6vw 84px}
+  .about-layout{position:absolute;min-height:0;height:100%;overflow:clip;padding:calc(var(--nav-h) + 8px) 4vw 8px;gap:8px}
   .about-head{align-items:flex-start}
   .about-head .page-title{font-size:clamp(25px,8vw,38px)}
-  .personal-rows{flex:none;grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:auto}
-  .personal-row{overflow:visible}
+  .personal-rows{flex:1;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:6px}
+  .background-info-card{grid-column:1/-1}
+  .personal-row{padding:8px}
+  .personal-row-heading{gap:6px;margin-bottom:5px;padding-bottom:5px}
+  .personal-row-heading span{font-size:8px}
+  .personal-row-heading h2{font-size:clamp(9px,2.4vw,12px)}
+  .personal-row-content{gap:5px}
+  .personal-row-content div{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:4px}
+  .personal-row-content dt,.personal-row-content dd{font-size:clamp(8px,2vw,10px);line-height:1.3}
+  .personal-row-content ul{gap:1px;padding-left:12px}
+  .privacy-note{margin:5px 0 0;font-size:8px;line-height:1.3}
   .personal-row-content div{grid-template-columns:minmax(90px,.7fr) minmax(0,1.3fr)}
   .achievements{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);min-height:0;height:100%;padding:calc(var(--nav-h) + 12px) 4vw 12px;gap:10px}
   .achievements-head{align-items:flex-start}
