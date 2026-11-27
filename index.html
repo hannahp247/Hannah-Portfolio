@@ -80,7 +80,7 @@ button{font:inherit}
 /* SCREENS */
 .screen{position:absolute;inset:0;z-index:1;opacity:0;visibility:hidden;pointer-events:none;
   transform:translateX(18px);transition:opacity .45s ease,transform .55s ease,visibility .55s}
-.screen.active{z-index:3;opacity:1;visibility:visible;transform:none}
+.screen.active{z-index:3;opacity:1;visibility:visible;pointer-events:auto;transform:none}
 
 /* HOME */
 .home-layout{width:100%;height:100%;display:grid;grid-template-columns:.88fr 1.12fr;
@@ -225,10 +225,10 @@ button{font:inherit}
 .family-card figcaption{flex:none;color:#f2effb;font:500 clamp(10px,1vw,13px)/1.4 var(--sans);text-align:center}
 
 /* EDGE PREVIOUS / NEXT (appear on hover) */
-.edge{position:fixed;z-index:4;top:var(--nav-h);bottom:0;width:clamp(110px,16vw,230px);border:0;
-  display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(14px,3vw,44px);cursor:pointer;opacity:0;transition:opacity .3s;
+.edge{position:fixed;z-index:4;top:var(--nav-h);bottom:0;width:clamp(32px,5vw,76px);border:0;
+  display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;opacity:0;transition:opacity .3s;
   background:linear-gradient(to right,#a5a0e81f,transparent)}
-.edge-left{left:0} .edge-right{right:0;justify-content:flex-end;padding-left:0;padding-right:clamp(14px,3vw,44px);background:linear-gradient(to left,#a5a0e81f,transparent)}
+.edge-left{left:0} .edge-right{right:0;justify-content:center;background:linear-gradient(to left,#a5a0e81f,transparent)}
 .edge:hover,.edge:focus-visible{opacity:1}
 .edge span{width:46px;height:46px;border:1px solid #c3bdf766;border-radius:50%;display:grid;place-items:center;
   color:var(--lavender);font:22px/1 var(--mono);background:#1d1c2dcc;transition:transform .25s,border-color .25s}
@@ -296,7 +296,7 @@ button{font:inherit}
   .family-card{scroll-snap-align:start}
   .family-photo-frame{border-radius:10px}
   .family-card figcaption{font-size:11px}
-  .edge{width:84px;padding-left:10px}.edge-right{padding-right:10px}.edge span{width:36px;height:36px;font-size:18px}
+  .edge span{width:36px;height:36px;font-size:18px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.cursor-glow{display:none}}
 </style>
